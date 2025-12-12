@@ -12,7 +12,7 @@ class WindowConfig:
     GEOMETRY = (WINDOWS_X, WINDOWS_Y, WINDOWS_WIDTH, WINDOWS_HEIGHT)
     WIDGET_RESIZABLE = True
     DEFAULT_THEME = "dark"
-    ICON_PATH = "Assets\PyLogo.ico"
+    ICON_PATH = "Assets\PyClickerApp_Logo.ico"
 
 class PyClickerConstants:
     DEFAULT_CLICK_BIND = "F6"
