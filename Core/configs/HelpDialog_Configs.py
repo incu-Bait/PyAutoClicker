@@ -1,7 +1,7 @@
 class DialogConstants:
     ABOUT_TITLE = "About PyClicker"
     ABOUT_TEXT = (
-        "<h2>PyClicker</h2>"
+        "<h2>PyClicker <span style='color: #666; font-size: 10pt; font-weight: normal;'>(Made with PyQt6)</span></h2>"
         "<p>An automated clicker application with:</p>"
         "<ul>"
         "<li>Customizable click settings</li>"
@@ -11,9 +11,9 @@ class DialogConstants:
         "<li>Hotkey support</li>"
         "</ul>"
         "<p>Use the Help menu to view all keyboard shortcuts.</p>"
-        "<p><b>Warning:</b> Do not exceed the recommended click settings."
-        "There will be a Warning pop when reaching those limits"
-        "can cause the applications or your system to become unstable or crash.</p>"
+        "<p><b>Warning:</b> Do not exceed the recommended click settings. "
+        "There will be a warning when reaching those limits. "
+        "Excessive click speeds can cause the application or your system to become unstable or crash.</p>"
     )
     SHORTCUTS_TITLE = "Keyboard Shortcuts"
     SHORTCUTS_MIN_WIDTH = 500

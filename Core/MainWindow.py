@@ -77,14 +77,8 @@ class PyClicker(QMainWindow):
     def _create_menus(self):
         menubar = self.menuBar()
         
-        # ---- File menu ----
-        file_menu = menubar.addMenu(PyClickerConstants.MENU_FILE)
-        exit_action = QAction(PyClickerConstants.ACTION_EXIT_TEXT, self)
-        exit_shortcut = self.keybind_manager.get_keybind("exit_app")
-        if exit_shortcut:
-            exit_action.setShortcut(exit_shortcut)
-        exit_action.triggered.connect(self.close)
-        file_menu.addAction(exit_action)
+        # # # ---- File menu ----
+        # # file_menu = menubar.addMenu(PyClickerConstants.MENU_FILE) # \\ This is Not Needed Right Now
         
         # ---- View menu ----
         view_menu = menubar.addMenu(PyClickerConstants.MENU_VIEW)
