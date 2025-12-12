@@ -23,9 +23,11 @@ class SettingsPanel(QWidget):
         self.warning_frame: QFrame = QFrame()
         self.warning_frame.setVisible(False)
         warning_layout: QHBoxLayout = QHBoxLayout(self.warning_frame)
-        self.warning_icon: QLabel = QLabel(SettingsPanel_Configs.WARNING_ICON)
-        self.warning_icon.setFixedSize(20, 20)
-        self.warning_icon.setObjectName("warning_icon")  
+        self.warning_icon: QLabel = QLabel()
+        self.warning_icon.setFixedSize(*SettingsPanel_Configs.WARNING_ICON_SIZE)
+        self.warning_icon.setObjectName("warning_icon")
+        self._load_warning_icon()
+        
         warning_layout.addWidget(self.warning_icon)
         self.warning_label: QLabel = QLabel()
         self.warning_label.setWordWrap(True)
@@ -117,7 +119,19 @@ class SettingsPanel(QWidget):
         self.apply_btn.setShortcut(apply_shortcut if apply_shortcut else QKeySequence())
         self.main_layout.addWidget(self.apply_btn)
         self.main_layout.addStretch()
-        
+    
+    def _load_warning_icon(self) -> None:
+        icon = self._get_warning_icon()
+        self.warning_icon.setPixmap(icon.pixmap(20, 20))
+    
+    def _get_warning_icon(self) -> QIcon:
+        if icon_path := getattr(SettingsPanel_Configs, 'WARNING_ICON_PATH', None):
+            custom_pixmap = QPixmap(icon_path)
+            if not custom_pixmap.isNull():
+                return QIcon(custom_pixmap)
+        # ---- fallback to system icon ----
+        return self.style().standardIcon(QStyle.StandardPixmap.SP_MessageBoxWarning)
+    
     def _update_button_shortcuts(self) -> None:
         capture_shortcut: Optional[str] = self.file_manager.get_keybind("capture_position")
         self.capture_btn.setShortcut(capture_shortcut if capture_shortcut else QKeySequence())

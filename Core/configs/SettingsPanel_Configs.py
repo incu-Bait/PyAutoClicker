@@ -42,6 +42,7 @@ class SettingsPanel_Configs:
     WARNING_LEVEL_EXTREME = "extreme"
     WARNING_LEVEL_ULTRA = "ultra"
     WARNING_LEVEL_FAST = "fast"
-    
-    WARNING_ICON = "⚠️" # \\ using Emojis for now , i should switch this to system icons
-    WARNING_TEXT_PREFIX = "⚠️ "
+
+    WARNING_TEXT_PREFIX = "-> "
+    WARNING_ICON_PATH = "Assets\WarningLogo.png"  
+    WARNING_ICON_SIZE = (20, 20)  
