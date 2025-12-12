@@ -1,0 +1,18 @@
+{
+    "capture_position": "Ctrl+C",
+    "exit_app": "Ctrl+Q",
+    "quick_apply": "Ctrl+Enter",
+    "reset_layout": "Ctrl+R",
+    "show_about": "Ctrl+I",
+    "show_shortcuts": "F1",
+    "theme_dark": "",
+    "theme_light": "",
+    "theme_neon": "",
+    "theme_neon_green": "Ctrl+3",
+    "toggle_clicking": "1",
+    "toggle_dot": "Ctrl+D",
+    "toggle_hotkey": "Ctrl+H",
+    "toggle_live_capture": "Ctrl+0",
+    "toggle_log": "Ctrl+L",
+    "toggle_settings": "Ctrl+S"
+}
