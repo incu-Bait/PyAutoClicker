@@ -79,9 +79,6 @@ class PyClicker(QMainWindow):
         
         # ---- File menu ----
         file_menu = menubar.addMenu(PyClickerConstants.MENU_FILE)
-        # # open_folder_action = QAction("Open KeyBinds Folder", self)
-        # # open_folder_action.triggered.connect(lambda: os.startfile("KeyBinds"))
-        # # file_menu.addAction(open_folder_action)
         exit_action = QAction(PyClickerConstants.ACTION_EXIT_TEXT, self)
         exit_shortcut = self.keybind_manager.get_keybind("exit_app")
         if exit_shortcut:
