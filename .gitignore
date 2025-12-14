@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Env
+.env
+venv/
