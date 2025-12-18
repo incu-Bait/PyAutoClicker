@@ -13,9 +13,7 @@ class UIManager:
         self.dot_overlay = ScreenDotOverlay()
         self.settings_panel: SettingsPanel | None = None
         self.hotkey_panel: HotkeyPanel | None = None
-        self.log_text: QTextEdit | None = None
         self.is_settings_visible = True
-        self.is_log_visible = True
         self.is_hotkey_visible = True
         self.is_dot_visible = False
         self.toggle_btn: QPushButton | None = None
@@ -23,7 +21,6 @@ class UIManager:
         self.status_label: QLabel | None = None
         self.count_label: QLabel | None = None
         self.settings_toggle: QAction | None = None
-        self.log_toggle: QAction | None = None
         self.hotkey_toggle: QAction | None = None
         self.dot_toggle: QAction | None = None
         self.stop_icon = self.main_window.style().standardIcon(PyClickerConstants.STOP_ICON)
@@ -82,17 +79,8 @@ class UIManager:
         settings_shortcut = self.main_window.keybind_manager.get_keybind("toggle_settings")
         if settings_shortcut:
             self.settings_toggle.setShortcut(settings_shortcut)
-        self.settings_toggle.triggered.connect(self.main_window.toggle_settings_panel)
+        self.settings_toggle.triggered.connect(self.main_window.event_handler.toggle_settings_panel)
         view_menu.addAction(self.settings_toggle)
-
-        self.log_toggle = QAction(PyClickerConstants.ACTION_LOG_PANEL_TEXT, self.main_window)
-        self.log_toggle.setCheckable(True)
-        self.log_toggle.setChecked(True)
-        log_shortcut = self.main_window.keybind_manager.get_keybind("toggle_log")
-        if log_shortcut:
-            self.log_toggle.setShortcut(log_shortcut)
-        self.log_toggle.triggered.connect(self.main_window.toggle_log_panel)
-        view_menu.addAction(self.log_toggle)
 
         self.hotkey_toggle = QAction(
             PyClickerConstants.ACTION_HOTKEY_PANEL_TEXT, self.main_window
@@ -102,7 +90,7 @@ class UIManager:
         hotkey_shortcut = self.main_window.keybind_manager.get_keybind("toggle_hotkey")
         if hotkey_shortcut:
             self.hotkey_toggle.setShortcut(hotkey_shortcut)
-        self.hotkey_toggle.triggered.connect(self.main_window.toggle_hotkey_panel)
+        self.hotkey_toggle.triggered.connect(self.main_window.event_handler.toggle_hotkey_panel)
         view_menu.addAction(self.hotkey_toggle)
         view_menu.addSeparator()
 
@@ -111,14 +99,14 @@ class UIManager:
         dot_shortcut = self.main_window.keybind_manager.get_keybind("toggle_dot")
         if dot_shortcut:
             self.dot_toggle.setShortcut(dot_shortcut)
-        self.dot_toggle.triggered.connect(self.main_window.toggle_dot_overlay)
+        self.dot_toggle.triggered.connect(self.main_window.event_handler.toggle_dot_overlay)
         view_menu.addAction(self.dot_toggle)
 
         reset_action = QAction(PyClickerConstants.ACTION_RESET_LAYOUT_TEXT, self.main_window)
         reset_shortcut = self.main_window.keybind_manager.get_keybind("reset_layout")
         if reset_shortcut:
             reset_action.setShortcut(reset_shortcut)
-        reset_action.triggered.connect(self.main_window.reset_layout)
+        reset_action.triggered.connect(self.main_window.event_handler.reset_layout)
         view_menu.addAction(reset_action)
 
         # --- Theme menu ---
@@ -131,7 +119,7 @@ class UIManager:
             if theme_shortcut:
                 action.setShortcut(theme_shortcut)
             action.triggered.connect(
-                lambda checked, name=theme_name: self.main_window.apply_theme(name)
+                lambda checked, name=theme_name: self.main_window.event_handler.apply_theme(name)
             )
             theme_menu.addAction(action)
 
@@ -140,11 +128,11 @@ class UIManager:
         shortcuts_action = QAction(
             PyClickerConstants.ACTION_KEYBOARD_SHORTCUTS_TEXT, self.main_window
         )
-        shortcuts_action.triggered.connect(self.main_window.show_keyboard_shortcuts)
+        shortcuts_action.triggered.connect(self.main_window.event_handler.show_keyboard_shortcuts)
         help_menu.addAction(shortcuts_action)
         help_menu.addSeparator()
         about_action = QAction(PyClickerConstants.ACTION_ABOUT_TEXT, self.main_window)
-        about_action.triggered.connect(self.main_window.show_about)
+        about_action.triggered.connect(self.main_window.event_handler.show_about)
         help_menu.addAction(about_action)
 
     def create_docks(self):
@@ -165,17 +153,6 @@ class UIManager:
         self.main_window.hotkey_dock.setWidget(self.hotkey_panel)
         self.main_window.addDockWidget(
             Qt.DockWidgetArea.RightDockWidgetArea, self.main_window.hotkey_dock
-        )
-        # --- Log dock ---
-        self.main_window.log_dock = QDockWidget(
-            PyClickerConstants.DOCK_LOG_TITLE, self.main_window
-        )
-        self.log_text = QTextEdit()
-        self.log_text.setReadOnly(True)
-        self.log_text.setMaximumHeight(PyClickerConstants.LOG_MAX_HEIGHT)
-        self.main_window.log_dock.setWidget(self.log_text)
-        self.main_window.addDockWidget(
-            Qt.DockWidgetArea.BottomDockWidgetArea, self.main_window.log_dock
         )
 
     def update_status_ui(self, running: bool):

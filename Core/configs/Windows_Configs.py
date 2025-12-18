@@ -12,9 +12,9 @@ class WindowConfig:
     TITLE = "PyClicker"
     WIDGET_RESIZABLE = True
     DEFAULT_THEME = "dark"
-    ICON_PATH = "Assets/PyClickerApp_Logo.ico"
+    ICON_PATH = "Assets/PyClickerApp_Logo.ico" 
 
-class PyClickerConstants:
+class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Const 
     # ======================
     # DEFAULT / APP SETTINGS 
     # ======================
@@ -67,8 +67,11 @@ class PyClickerConstants:
     ACTION_RESET_LAYOUT_TEXT = "Reset Layout"
     ACTION_KEYBOARD_SHORTCUTS_TEXT = "Keyboard Shortcuts"
     ACTION_ABOUT_TEXT = "About PyClicker"
-    ACTION_EXIT_TEXT = "PLACEHOLDER TEXT" # \\ NEED TO FIX THIS BUG 
     
+    # TODO --> For some reason the app need this const to work, 
+    # TODO --> prob forgot i was adding a "Before Exit" pop up message 
+    ACTION_EXIT_TEXT = "PLACEHODLER TEXT"  
+   
     # ======================
     # DOCK WIDGETS
     # ======================
@@ -82,9 +85,12 @@ class PyClickerConstants:
     ICON_ALTERNATIVE = QStyle.StandardPixmap.SP_ComputerIcon
     STOP_ICON = QStyle.StandardPixmap.SP_MediaPause
     PLAY_ICON = QStyle.StandardPixmap.SP_MediaPlay
-    
+
     # ======================
-    # LOG MESSAGES
+    # TODO --> Most if not all these const are unused after removing "LogPanel" 
+    # TODO --> gotta find out for sure before removing any of them 
+    # ======================
+    # LOG MESSAGES <-- 
     # ======================
     LOG_STATUS_STOPPED_KEYWORD = "Stopped"
     

@@ -1,7 +1,4 @@
-from Core.globals.Base_import import *
-from Core.managers.ThemeManager import * 
-from Core.configs.Theme_Configs import *
-from Core.configs.Windows_Configs import *
+from Core.globals.Base_import import QApplication , sys, pyautogui
 from Core.MainWindow import PyClicker
 
 def EntryPoint():
