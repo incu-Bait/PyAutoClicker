@@ -113,11 +113,6 @@ class SettingsPanel(QWidget):
         pos_layout.addLayout(capture_layout)
         self.main_layout.addWidget(pos_group)
 
-        # ---- Apply Button ----
-        self.apply_btn: QPushButton = QPushButton(SettingsPanel_Configs.APPLY_BUTTON_TEXT)
-        apply_shortcut: Optional[str] = self.file_manager.get_keybind("quick_apply")
-        self.apply_btn.setShortcut(apply_shortcut if apply_shortcut else QKeySequence())
-        self.main_layout.addWidget(self.apply_btn)
         self.main_layout.addStretch()
     
     def _load_warning_icon(self) -> None:
@@ -135,8 +130,6 @@ class SettingsPanel(QWidget):
     def _update_button_shortcuts(self) -> None:
         capture_shortcut: Optional[str] = self.file_manager.get_keybind("capture_position")
         self.capture_btn.setShortcut(capture_shortcut if capture_shortcut else QKeySequence())
-        apply_shortcut: Optional[str] = self.file_manager.get_keybind("quick_apply")
-        self.apply_btn.setShortcut(apply_shortcut if apply_shortcut else QKeySequence())
         live_shortcut: Optional[str] = self.file_manager.get_keybind("toggle_live_capture")
         self.live_capture_btn.setShortcut(live_shortcut if live_shortcut else QKeySequence())
         
@@ -146,7 +139,6 @@ class SettingsPanel(QWidget):
         self.overlay_toggle.toggled.connect(self.toggle_overlay)
         self.cursor_radio.toggled.connect(self.update_enable_state)
         self.fixed_radio.toggled.connect(self.on_fixed_toggled)
-        self.apply_btn.clicked.connect(self.apply_triggered.emit)
         self.interval_spin.valueChanged.connect(self.check_speed_warning)
         self.x_spin.valueChanged.connect(self.on_position_changed)
         self.y_spin.valueChanged.connect(self.on_position_changed)

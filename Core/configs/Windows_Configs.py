@@ -22,7 +22,7 @@ class PyClickerConstants:
     STATUS_READY_MESSAGE = "Ready"
     
     # ======================
-    # UI DIMENSIONS
+    # UI DIMENSIONSF
     # ======================
     STATUS_ICON_SIZE = 25
     TOGGLE_BUTTON_MIN_HEIGHT = 60
@@ -67,6 +67,7 @@ class PyClickerConstants:
     ACTION_RESET_LAYOUT_TEXT = "Reset Layout"
     ACTION_KEYBOARD_SHORTCUTS_TEXT = "Keyboard Shortcuts"
     ACTION_ABOUT_TEXT = "About PyClicker"
+    ACTION_EXIT_TEXT = "PLACEHOLDER TEXT" # \\ NEED TO FIX THIS BUG 
     
     # ======================
     # DOCK WIDGETS
