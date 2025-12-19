@@ -93,13 +93,7 @@ class QMW_EventHandler:
             self.main.ui_manager.toggle_btn.setText(PyClickerConstants.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey.upper()))
         
         self.main.hotkey = hotkey
-        
-    def on_status(self, message):
-        self.log(message)
-        self.main.statusBar().showMessage(message)
-        if PyClickerConstants.LOG_STATUS_STOPPED_KEYWORD in message:
-            self.main.ui_manager.update_ui(False)
-            
+         
     def on_count(self, count):
         self.main.ui_manager.update_count_ui(count)
         

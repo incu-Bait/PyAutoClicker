@@ -28,7 +28,6 @@ class PyClicker(QMainWindow):
         self.ui_manager.toggle_btn.clicked.connect(self.event_handler.toggle_clicking)
         self.ui_manager.settings_panel.apply_triggered.connect(self.event_handler.apply_settings)
         self.ui_manager.hotkey_panel.hotkey_changed.connect(self.event_handler.change_hotkey)
-        self.clicker.status_update.connect(self.event_handler.on_status)
         self.clicker.click_count_update.connect(self.event_handler.on_count)
         self.ui_manager.settings_panel.position_updated.connect(self.event_handler.on_position_updated)
         keyboard.add_hotkey(self.hotkey.lower(), self.event_handler.toggle_clicking)
