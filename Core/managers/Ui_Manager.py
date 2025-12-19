@@ -69,13 +69,11 @@ class UIManager:
         menubar = self.main_window.menuBar()
         # --- File menu ---
         file_menu = menubar.addMenu(PyClickerConstants.MENU_FILE)
-        
-        # Exit action
         exit_action = QAction("Exit", self.main_window)
         exit_shortcut = self.main_window.keybind_manager.get_keybind("exit_app")
         if exit_shortcut:
             exit_action.setShortcut(exit_shortcut)
-        exit_action.triggered.connect(self.main_window.close)  # Connect to close window
+        exit_action.triggered.connect(self.main_window.close)
         file_menu.addAction(exit_action)
     
         # --- View menu ---

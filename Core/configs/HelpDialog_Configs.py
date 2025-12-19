@@ -1,11 +1,11 @@
 class DialogConstants:
-    ABOUT_TITLE = "About PyClicker"
+    ABOUT_TITLE = "About PyAutoClicker"
     ABOUT_TEXT = (
         "<h2>PyClicker "
         "<span style='color:#666; font-size:6px; font-weight:normal;'>"
         "Made by Riley"
         "</span></h2>"
-        "<p>An automated clicker application with:</p>"
+        "<p>A simple auto clicker app</p>"
         "<ul>"
         "<li>Customizable click settings</li>"
         "<li>Multiple themes</li>"
@@ -25,7 +25,6 @@ class DialogConstants:
     SHORTCUTS_HEADER_TEXT = "Double-click on a shortcut to edit it"
     EDIT_TOGGLE_ENABLED_TEXT = "Editing Enabled"
     EDIT_TOGGLE_DISABLED_TEXT = "Enable Editing"
-    # EDIT_TOGGLE_ENABLED_STYLE = "background-color: #4CAF50; color: white;"  
     RESET_BUTTON_TEXT = "Reset to Defaults"
     SAVE_BUTTON_TEXT = "Save Changes"
     CLOSE_BUTTON_TEXT = "Close"
