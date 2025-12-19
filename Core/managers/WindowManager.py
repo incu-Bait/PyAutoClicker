@@ -4,7 +4,9 @@ from Core.configs.Windows_Configs import PyClickerConstants, WindowConfig
 class WindowManager:
     def __init__(self, main_window):
         self.main_window = main_window
-        
+        self.app_dir = os.path.dirname(os.path.abspath(sys.argv[0])) # \\ This should fix the issue with not being able to find Asset directory 
+                                                                     # just gets the app directory where "Main.py" is. Might run in to some issues with this tho if "Main.py"
+                                                                     # is moved.
     def setup_window(self):
         self.main_window.setWindowTitle(WindowConfig.TITLE)
         self.main_window.setGeometry(*WindowConfig.GEOMETRY)
@@ -12,10 +14,9 @@ class WindowManager:
         self.setup_icon()
         
     def setup_icon(self):
-        icon_path = os.path.join(os.path.dirname(__file__), "..", WindowConfig.ICON_PATH)
+        icon_path = os.path.join(self.app_dir, WindowConfig.ICON_PATH)
         icon_path = os.path.normpath(icon_path)
         if os.path.exists(icon_path):
             self.main_window.setWindowIcon(QIcon(icon_path))
         else:
             self.main_window.setWindowIcon(self.main_window.style().standardIcon(PyClickerConstants.ICON_ALTERNATIVE))
-
