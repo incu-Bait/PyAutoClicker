@@ -52,4 +52,4 @@ pip install PyQt6 pyautogui keyboard
 [![Windows](https://img.shields.io/badge/Windows_Only-0078D6?style=for-the-badge&logo=windows&logoColor=white)]()
 [![License](https://img.shields.io/badge/LICENSE-MIT-8A2BE2?style=for-the-badge)](LICENSE)
 
-</div> </div><!-- Bottom graphic overlapping the badges --><div align="center" style="margin-top: -80px; position: relative; z-index: 1;"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg"> <img src="https://raw.githubusercontent.com/trinib/trinib/
+</div> </div><!-- Bottom graphic overlapping the badges --><div align="center" style="margin-top: -60px; position: relative; z-index: 1;"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg"> <img src="https://raw.githubusercontent.com/trinib/trinib/
