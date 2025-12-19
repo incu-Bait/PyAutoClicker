@@ -1,8 +1,5 @@
-<div align="center">
-
-<div> 
-WORK IN PROGRESS – Some features may not work as intended and are subject to change 
-</div>
+> **Note:** This project is a work in progress.  
+> Features may be incomplete or subject to change.
 
 <div align="center">
 
