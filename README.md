@@ -1,4 +1,7 @@
 <div align="center">
+<div style="background: linear-gradient(90deg; color: white; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-weight: bold; border: 2px dashed white;"> WORK IN PROGRESS - Features subject to change </div>
+
+<div align="center">
 
 <!-- Animated typing effect for Title -->
 <h2 align="center">
