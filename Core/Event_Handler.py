@@ -53,11 +53,6 @@ class QMW_EventHandler:
             self.main.ui_manager.update_ui(True)
     
     def update_keybind_shortcuts(self):
-        # # exit_shortcut = self.main.keybind_manager.get_keybind("exit_app")
-        # # if exit_shortcut:
-        # #     for action in self.main.findChildren(QAction):
-        # #         if action.text() == PyClickerConstants.ACTION_EXIT_TEXT:
-        # #             action.setShortcut(exit_shortcut)
 
         settings_shortcut = self.main.keybind_manager.get_keybind("toggle_settings")
         if settings_shortcut:
