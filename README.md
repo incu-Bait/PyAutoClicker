@@ -2,7 +2,7 @@
 
 <!-- Animated typing effect for Title -->
 <h2 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=FF6B35&center=true&vCenter=true&width=500&lines=PyAutoClicker" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=0000FF&center=true&vCenter=true&width=500&lines=PyAutoClicker" alt="Typing SVG" />
 </h2>
 
 ### *Simple Auto Clicker App Made With Python | PyQt6 GUI Library*
@@ -26,9 +26,9 @@
 
 <div align="center">
 
-## **Prerequisites \ Required Packages \ pip install**
-
-
+<h2 align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=FFFF00&center=true&vCenter=true&width=500&lines=Prerequisites" alt="Typing SVG" />
+</h2>
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" />
   <div style="text-align: left;">
