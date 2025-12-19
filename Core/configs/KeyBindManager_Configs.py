@@ -23,7 +23,6 @@ class KeybindConstants:
     DISPLAY_NAMES = {
         "toggle_clicking": "Start/Stop Clicker",
         "capture_position": "Capture Position",
-        "quick_apply": "Apply Settings",
         "toggle_settings": "Toggle Settings Panel",
         "toggle_log": "Toggle Log Panel",
         "toggle_hotkey": "Toggle Hotkey Panel",
