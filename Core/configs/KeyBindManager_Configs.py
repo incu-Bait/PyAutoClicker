@@ -4,11 +4,9 @@ class KeybindConstants:
     SAVED_MESSAGE = "Saved keybinds to: {path}"
     WARNING_SAVE_MESSAGE = "Warning: Could not save keybinds to {file}: {error}"
     
-    # In KeyBindManager_Configs.py, update DEFAULT_KEYBINDS:
     DEFAULT_KEYBINDS = {
         "toggle_clicking": "F6",
         "capture_position": "Ctrl+C",
-        # # "quick_apply": "Ctrl+Enter",
         "toggle_settings": "Ctrl+S",
         "toggle_log": "Ctrl+L",
         "toggle_hotkey": "Ctrl+H",
