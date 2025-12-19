@@ -4,10 +4,11 @@ class KeybindConstants:
     SAVED_MESSAGE = "Saved keybinds to: {path}"
     WARNING_SAVE_MESSAGE = "Warning: Could not save keybinds to {file}: {error}"
     
+    # In KeyBindManager_Configs.py, update DEFAULT_KEYBINDS:
     DEFAULT_KEYBINDS = {
         "toggle_clicking": "F6",
         "capture_position": "Ctrl+C",
-        "quick_apply": "Ctrl+Enter",
+        # # "quick_apply": "Ctrl+Enter",
         "toggle_settings": "Ctrl+S",
         "toggle_log": "Ctrl+L",
         "toggle_hotkey": "Ctrl+H",
@@ -15,10 +16,12 @@ class KeybindConstants:
         "reset_layout": "Ctrl+R",
         "exit_app": "Ctrl+Q",
         "theme_dark": "",
-        "theme_light": "",
-        "theme_neon": ""
+        "theme_light": "", 
+        "theme_neon_green": "",  
+        "show_shortcuts": "F1",  
+        "show_about": "Ctrl+F1"  
     }
-    
+
     DISPLAY_NAMES = {
         "toggle_clicking": "Start/Stop Clicker",
         "capture_position": "Capture Position",
@@ -31,5 +34,7 @@ class KeybindConstants:
         "exit_app": "Exit Application",
         "theme_dark": "Switch to Dark Theme",
         "theme_light": "Switch to Light Theme",
-        "theme_neon": "Switch to Neon Theme"
+        "theme_neon_green": "Switch to Neon Green Theme",
+        "show_shortcuts": "Show Keyboard Shortcuts",
+        "show_about": "Show About Dialog"
     }

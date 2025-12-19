@@ -67,7 +67,17 @@ class UIManager:
 
     def create_menus(self):
         menubar = self.main_window.menuBar()
-
+        # --- File menu ---
+        file_menu = menubar.addMenu(PyClickerConstants.MENU_FILE)
+        
+        # Exit action
+        exit_action = QAction("Exit", self.main_window)
+        exit_shortcut = self.main_window.keybind_manager.get_keybind("exit_app")
+        if exit_shortcut:
+            exit_action.setShortcut(exit_shortcut)
+        exit_action.triggered.connect(self.main_window.close)  # Connect to close window
+        file_menu.addAction(exit_action)
+    
         # --- View menu ---
         view_menu = menubar.addMenu(PyClickerConstants.MENU_VIEW)
 
@@ -128,13 +138,19 @@ class UIManager:
         shortcuts_action = QAction(
             PyClickerConstants.ACTION_KEYBOARD_SHORTCUTS_TEXT, self.main_window
         )
+        shortcuts_shortcut = self.main_window.keybind_manager.get_keybind("show_shortcuts")
+        if shortcuts_shortcut:
+            shortcuts_action.setShortcut(shortcuts_shortcut)
         shortcuts_action.triggered.connect(self.main_window.event_handler.show_keyboard_shortcuts)
         help_menu.addAction(shortcuts_action)
         help_menu.addSeparator()
         about_action = QAction(PyClickerConstants.ACTION_ABOUT_TEXT, self.main_window)
+        about_shortcut = self.main_window.keybind_manager.get_keybind("show_about")
+        if about_shortcut:
+            about_action.setShortcut(about_shortcut)
         about_action.triggered.connect(self.main_window.event_handler.show_about)
         help_menu.addAction(about_action)
-
+    
     def create_docks(self):
         # --- Settings dock ---
         self.main_window.settings_dock = QDockWidget(

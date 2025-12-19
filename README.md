@@ -1,5 +1,8 @@
 <div align="center">
-<div style="background: linear-gradient(90deg; color: white; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-weight: bold; border: 2px dashed white;"> WORK IN PROGRESS – Some features may not work as intended and are subject to change</div>
+
+<div> 
+WORK IN PROGRESS – Some features may not work as intended and are subject to change 
+</div>
 
 <div align="center">
 

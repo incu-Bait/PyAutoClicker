@@ -96,7 +96,6 @@ class ShortcutsDialog(BaseDialog):
         self.editing_enabled = self.edit_toggle.isChecked()
         if self.editing_enabled:
             self.edit_toggle.setText(DialogConstants.EDIT_TOGGLE_ENABLED_TEXT)
-            # self.edit_toggle.setStyleSheet(DialogConstants.EDIT_TOGGLE_ENABLED_STYLE)  
             for row in range(self.table.rowCount()):
                 item = self.table.item(row, 1)
                 if item:

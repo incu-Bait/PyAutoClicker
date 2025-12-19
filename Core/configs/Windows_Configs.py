@@ -67,10 +67,7 @@ class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Cons
     ACTION_RESET_LAYOUT_TEXT = "Reset Layout"
     ACTION_KEYBOARD_SHORTCUTS_TEXT = "Keyboard Shortcuts"
     ACTION_ABOUT_TEXT = "About PyClicker"
-    
-    # TODO --> For some reason the app need this const to work, 
-    # TODO --> prob forgot i was adding a "Before Exit" pop up message 
-    ACTION_EXIT_TEXT = "PLACEHODLER TEXT"  
+    ACTION_EXIT_TEXT = "EXIT APP"  
    
     # ======================
     # DOCK WIDGETS

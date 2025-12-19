@@ -2,7 +2,9 @@ from Core.globals.Base_import import QDateTime, keyboard, QAction
 from Core.configs.Theme_Configs import DEFAULT_THEME
 from Core.QDialog.HelpDialog import ShortcutsDialog, AboutDialog
 from Core.configs.Windows_Configs import PyClickerConstants
-## "QMW" (QMainWindow)
+
+## "QMW" (QMainWindow) Just in case i make more then one event handler like a dumbass 
+## remember That means "QMainWindow" and handles Main Window Events ... or should at lease 
 
 class QMW_EventHandler:
     def __init__(self, main):
@@ -51,11 +53,11 @@ class QMW_EventHandler:
             self.main.ui_manager.update_ui(True)
     
     def update_keybind_shortcuts(self):
-        exit_shortcut = self.main.keybind_manager.get_keybind("exit_app")
-        if exit_shortcut:
-            for action in self.main.findChildren(QAction):
-                if action.text() == PyClickerConstants.ACTION_EXIT_TEXT:
-                    action.setShortcut(exit_shortcut)
+        # # exit_shortcut = self.main.keybind_manager.get_keybind("exit_app")
+        # # if exit_shortcut:
+        # #     for action in self.main.findChildren(QAction):
+        # #         if action.text() == PyClickerConstants.ACTION_EXIT_TEXT:
+        # #             action.setShortcut(exit_shortcut)
 
         settings_shortcut = self.main.keybind_manager.get_keybind("toggle_settings")
         if settings_shortcut:
@@ -76,15 +78,17 @@ class QMW_EventHandler:
                     action.setShortcut(reset_shortcut)
 
         for theme_name in self.main.theme_manager.get_available_themes():
-            theme_key = f"theme_{theme_name.replace(' ', '_').lower()}"
+            theme_key = f"theme_{theme_name.lower().replace(' ', '_')}"
             theme_shortcut = self.main.keybind_manager.get_keybind(theme_key)
-            for action in self.main.menuBar().actions():
-                if action.menu():
-                    menu = action.menu()
-                    for menu_action in menu.actions():
-                        if menu_action.text().lower() == theme_name.lower():
-                            if theme_shortcut:
+            if theme_shortcut:
+                for action in self.main.menuBar().actions():
+                    if action.menu():
+                        menu = action.menu()
+                        for menu_action in menu.actions():
+                            # Match by theme name (case-insensitive)
+                            if menu_action.text().lower() == theme_name.lower():
                                 menu_action.setShortcut(theme_shortcut)
+                                break
 
         hotkey = self.main.keybind_manager.get_keybind("toggle_clicking") or PyClickerConstants.DEFAULT_CLICK_BIND
         if self.main.clicker.is_running:
