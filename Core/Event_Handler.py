@@ -1,10 +1,11 @@
-from Core.globals.Base_import import QDateTime, keyboard, QAction
-from Core.configs.Theme_Configs import DEFAULT_THEME
-from Core.QDialog.HelpDialog import ShortcutsDialog, AboutDialog
-from Core.configs.Windows_Configs import PyClickerConstants
 
 ## "QMW" (QMainWindow) Just in case i make more then one event handler like a dumbass 
 ## remember That means "QMainWindow" and handles Main Window Events ... or should at lease 
+
+from Core.globals.Base_import import QDateTime, keyboard, QAction
+from Core.configs.Theme_Configs import DEFAULT_THEME
+from Core.QDialog.HelpDialog import ShortcutsDialog, AboutDialog
+from Core.configs.Windows_Configs import QMW_UIConfig
 
 class QMW_EventHandler:
     def __init__(self, main):
@@ -18,7 +19,7 @@ class QMW_EventHandler:
         if self.main.theme_manager.set_theme(theme_name):
             stylesheet = self.main.theme_manager.PyStyleSheet(theme_name)
             self.main.setStyleSheet(stylesheet)
-            message = PyClickerConstants.THEME_CHANGE_MESSAGE_FORMAT.format(theme_name=theme_name.title())
+            message = QMW_UIConfig.THEME_CHANGE_MESSAGE_FORMAT.format(theme_name=theme_name.title())
             self.main.statusBar().showMessage(message)
             self.main.update() 
             if hasattr(self.main.ui_manager, 'settings_panel'):
@@ -69,7 +70,7 @@ class QMW_EventHandler:
         reset_shortcut = self.main.keybind_manager.get_keybind("reset_layout")
         if reset_shortcut:
             for action in self.main.findChildren(QAction):
-                if action.text() == PyClickerConstants.ACTION_RESET_LAYOUT_TEXT:
+                if action.text() == QMW_UIConfig.ACTION_RESET_LAYOUT_TEXT:
                     action.setShortcut(reset_shortcut)
 
         for theme_name in self.main.theme_manager.get_available_themes():
@@ -85,11 +86,11 @@ class QMW_EventHandler:
                                 menu_action.setShortcut(theme_shortcut)
                                 break
 
-        hotkey = self.main.keybind_manager.get_keybind("toggle_clicking") or PyClickerConstants.DEFAULT_CLICK_BIND
+        hotkey = self.main.keybind_manager.get_keybind("toggle_clicking") or QMW_UIConfig.DEFAULT_CLICK_BIND
         if self.main.clicker.is_running:
-            self.main.ui_manager.toggle_btn.setText(PyClickerConstants.TOGGLE_STOP_TEXT_FORMAT.format(hotkey=hotkey.upper()))
+            self.main.ui_manager.toggle_btn.setText(QMW_UIConfig.TOGGLE_STOP_TEXT_FORMAT.format(hotkey=hotkey.upper()))
         else:
-            self.main.ui_manager.toggle_btn.setText(PyClickerConstants.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey.upper()))
+            self.main.ui_manager.toggle_btn.setText(QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey.upper()))
         
         self.main.hotkey = hotkey
          
@@ -123,7 +124,7 @@ class QMW_EventHandler:
         self.main.ui_manager.settings_toggle.setChecked(True)
         self.main.ui_manager.hotkey_toggle.setChecked(True)
         self.main.ui_manager.dot_toggle.setChecked(False)
-        self.main.statusBar().showMessage(PyClickerConstants.LAYOUT_RESET_MESSAGE)
+        self.main.statusBar().showMessage(QMW_UIConfig.LAYOUT_RESET_MESSAGE)
         
     def show_keyboard_shortcuts(self):
         ShortcutsDialog(self.main.keybind_manager, self.main).exec()

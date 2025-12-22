@@ -1,5 +1,5 @@
 from Core.globals.Base_import import *
-from Core.configs.Windows_Configs import PyClickerConstants, WindowConfig
+from Core.configs.Windows_Configs import WindowConfig, QMW_UIConfig
 
 class WindowManager:
     def __init__(self, main_window):
@@ -11,7 +11,7 @@ class WindowManager:
         self.main_window.setWindowTitle(WindowConfig.TITLE)
         self.main_window.setGeometry(*WindowConfig.GEOMETRY)
         self.center_window()
-        self.main_window.statusBar().showMessage(PyClickerConstants.STATUS_READY_MESSAGE)
+        self.main_window.statusBar().showMessage(QMW_UIConfig.STATUS_READY_MESSAGE)
         self.setup_icon()
         
     def center_window(self):
@@ -26,4 +26,4 @@ class WindowManager:
         if os.path.exists(icon_path):
             self.main_window.setWindowIcon(QIcon(icon_path))
         else:
-            self.main_window.setWindowIcon(self.main_window.style().standardIcon(PyClickerConstants.ICON_ALTERNATIVE))
+            self.main_window.setWindowIcon(self.main_window.style().standardIcon(QMW_UIConfig.ICON_ALTERNATIVE))

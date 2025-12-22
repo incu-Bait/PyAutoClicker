@@ -2,7 +2,7 @@ from Core.globals.Base_import import QMainWindow, keyboard
 from Core.managers.ThemeManager import ThemeManager 
 from Core.QThread.ClickThread import ClickerThread
 from Core.managers.KeyBindManager import KeybindManager
-from Core.configs.Windows_Configs import PyClickerConstants
+from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.managers.Ui_Manager import UIManager
 from Core.managers.WindowManager import WindowManager
 from Core.Event_Handler import QMW_EventHandler
@@ -16,7 +16,7 @@ class PyClicker(QMainWindow):
         self.event_handler = QMW_EventHandler(self)        
         self.ui_manager = UIManager(self, self.theme_manager)       
         self.keybind_manager = KeybindManager("KeyBinds/key_binds_data.json")
-        self.hotkey = self.keybind_manager.get_keybind("toggle_clicking") or PyClickerConstants.DEFAULT_CLICK_BIND
+        self.hotkey = self.keybind_manager.get_keybind("toggle_clicking") or QMW_UIConfig.DEFAULT_CLICK_BIND
         self.window_manager.setup_window()
         self.ui_manager.create_widgets()
         self.ui_manager.create_menus()

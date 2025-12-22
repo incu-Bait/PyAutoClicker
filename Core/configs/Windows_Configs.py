@@ -2,6 +2,7 @@
 # WINDOW CONFIGURATION
 # ============================================
 from Core.globals.Base_import import *
+from PyQt6.QtCore import Qt
 
 class WindowConfig:
     WINDOW_X = 100 
@@ -14,7 +15,8 @@ class WindowConfig:
     DEFAULT_THEME = "dark"
     ICON_PATH = "Assets/PyClickerApp_Logo.ico" 
 
-class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Const 
+
+class QMW_UIConfig:  ## \\ QMW = QMainWindow 
     # ======================
     # DEFAULT / APP SETTINGS 
     # ======================
@@ -22,11 +24,18 @@ class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Cons
     STATUS_READY_MESSAGE = "Ready"
     
     # ======================
-    # UI DIMENSIONSF
+    # UI DIMENSIONS
     # ======================
     STATUS_ICON_SIZE = 25
     TOGGLE_BUTTON_MIN_HEIGHT = 60
     LOG_MAX_HEIGHT = 200
+    SETTINGS_PANEL_MIN_WIDTH = 295
+    SETTINGS_PANEL_MIN_HEIGHT = 295
+    HOTKEY_PANEL_MIN_WIDTH = 230
+    HOTKEY_PANEL_MIN_HEIGHT = 230
+    CENTRAL_WIDGET_MIN_WIDTH = 300
+    CENTRAL_WIDGET_MIN_HEIGHT = 200
+    INITIAL_DOCK_WIDTHS = [300, 200]
     
     # ======================
     # UI OBJECT NAMES
@@ -75,6 +84,17 @@ class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Cons
     DOCK_SETTINGS_TITLE = "Settings"
     DOCK_HOTKEY_TITLE = "Hotkey"
     DOCK_LOG_TITLE = "Log"
+    # Dock Features \ Combines them \ Allowed areas \ Policy
+    DOCK_MOVABLE = QDockWidget.DockWidgetFeature.DockWidgetMovable
+    DOCK_FLOATABLE = QDockWidget.DockWidgetFeature.DockWidgetFloatable
+    DOCK_CLOSABLE = QDockWidget.DockWidgetFeature.DockWidgetClosable
+    DOCK_FEATURES = DOCK_MOVABLE | DOCK_FLOATABLE | DOCK_CLOSABLE # \\ Combines
+    DOCK_ALLOWED_LEFT_RIGHT = (
+        Qt.DockWidgetArea.LeftDockWidgetArea | 
+        Qt.DockWidgetArea.RightDockWidgetArea
+    )
+    SIZE_POLICY_PREFERRED = QSizePolicy.Policy.Preferred
+    DOCK_HORIZONTAL = Qt.Orientation.Horizontal
     
     # ======================
     # ICON REFERENCES
@@ -90,8 +110,6 @@ class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Cons
     # LOG MESSAGES <-- 
     # ======================
     LOG_STATUS_STOPPED_KEYWORD = "Stopped"
-    
-    # Log Events
     LOG_THEME_FORMAT = "Theme: {theme_name}"
     LOG_SETTINGS_APPLIED = "Settings applied"
     LOG_STOPPED = "Stopped"
@@ -99,7 +117,5 @@ class PyClickerConstants: # TODO --> Should prob rename this to QMainWindow_Cons
     LOG_DOT_ENABLED = "Dot overlay enabled"
     LOG_DOT_DISABLED = "Dot overlay disabled"
     LOG_KEYBIND_UPDATED = "Keybind shortcuts updated"
-    
-    # Log Error/Info Formats
     LOG_HOTKEY_CHANGED_FORMAT = "Hotkey changed to {hotkey}"
     LOG_HOTKEY_FAILED_FORMAT = "Failed to apply hotkey: {error}"
