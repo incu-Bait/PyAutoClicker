@@ -1,4 +1,3 @@
-from typing import Optional
 from Core.globals.Base_import import *
 from Core.managers.ThemeManager import ThemeManager
 from Core.configs.Theme_Configs import *
@@ -142,7 +141,7 @@ class UIManager:
                 lambda checked, name=theme_name: self.main_window.event_handler.apply_theme(name)
             )
             theme_menu.addAction(action)
-            
+
         # --- Help menu with shortcuts ---
         help_menu = menubar.addMenu(QMW_UIConfig.MENU_HELP)
         shortcuts_action = QAction(
