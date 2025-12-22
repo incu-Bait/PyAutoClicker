@@ -8,7 +8,7 @@ THEME_PRESETS = {
         "bg_tertiary": "#252526",
         "text_primary": "#CCCCCC",
         "text_secondary": "#A0A0A0",
-        "accent": "#F1F1F1F8",
+        "accent": "#8D8D8D",
         "highlight": "#3E3E40",
         "border": "#3E3E40",
         "success": "#4EC9B0",

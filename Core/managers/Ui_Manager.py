@@ -6,6 +6,8 @@ from Core.configs.Windows_Configs import PyClickerConstants
 from Core.QWidgets.SettingsPanel import SettingsPanel
 from Core.QWidgets.HotKeyPanel import HotkeyPanel
 
+# TODO --> Clean this file up \ Move 'DockWidgetFeature" into config file
+
 class UIManager:
     def __init__(self, main_window, theme_manager: ThemeManager):
         self.main_window = main_window
@@ -156,18 +158,61 @@ class UIManager:
         )
         self.settings_panel = SettingsPanel(self.theme_manager, self.dot_overlay)
         self.main_window.settings_dock.setWidget(self.settings_panel)
+        self.main_window.settings_dock.setFeatures(
+            QDockWidget.DockWidgetFeature.DockWidgetMovable |
+            QDockWidget.DockWidgetFeature.DockWidgetFloatable |
+            QDockWidget.DockWidgetFeature.DockWidgetClosable
+        )
+        self.main_window.settings_dock.setAllowedAreas(
+            Qt.DockWidgetArea.LeftDockWidgetArea | 
+            Qt.DockWidgetArea.RightDockWidgetArea
+        )
+        self.settings_panel.setSizePolicy(
+            QSizePolicy.Policy.Preferred, 
+            QSizePolicy.Policy.Preferred
+        )
+        self.settings_panel.setMinimumWidth(295)  
+        self.settings_panel.setMinimumHeight(295)  
+        
         self.main_window.addDockWidget(
             Qt.DockWidgetArea.LeftDockWidgetArea, self.main_window.settings_dock
         )
+        
         # --- Hotkey dock ---
         self.main_window.hotkey_dock = QDockWidget(
             PyClickerConstants.DOCK_HOTKEY_TITLE, self.main_window
         )
         self.hotkey_panel = HotkeyPanel(self.main_window.hotkey)
         self.main_window.hotkey_dock.setWidget(self.hotkey_panel)
+        
+        self.main_window.hotkey_dock.setFeatures(
+            QDockWidget.DockWidgetFeature.DockWidgetMovable |
+            QDockWidget.DockWidgetFeature.DockWidgetFloatable |
+            QDockWidget.DockWidgetFeature.DockWidgetClosable
+        )
+        self.main_window.hotkey_dock.setAllowedAreas(
+            Qt.DockWidgetArea.LeftDockWidgetArea | 
+            Qt.DockWidgetArea.RightDockWidgetArea
+        )
+        self.hotkey_panel.setSizePolicy(
+            QSizePolicy.Policy.Preferred, 
+            QSizePolicy.Policy.Preferred
+        )
+        self.hotkey_panel.setMinimumWidth(230) 
+        self.hotkey_panel.setMinimumHeight(230)
+        
         self.main_window.addDockWidget(
             Qt.DockWidgetArea.RightDockWidgetArea, self.main_window.hotkey_dock
         )
+    
+        self.main_window.resizeDocks(
+            [self.main_window.settings_dock, self.main_window.hotkey_dock],
+            [300, 200],
+            Qt.Orientation.Horizontal
+        )
+        central_widget = self.main_window.centralWidget()
+        if central_widget:
+            central_widget.setMinimumSize(300, 200)
 
     def update_status_ui(self, running: bool):
         if running:

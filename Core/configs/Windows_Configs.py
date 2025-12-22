@@ -6,8 +6,8 @@ from Core.globals.Base_import import *
 class WindowConfig:
     WINDOW_X = 100 
     WINDOW_Y = 100 
-    WINDOW_WIDTH = 700
-    WINDOW_HEIGHT = 500
+    WINDOW_WIDTH = 750
+    WINDOW_HEIGHT = 490
     GEOMETRY = (WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT)
     TITLE = "PyClicker"
     WIDGET_RESIZABLE = True

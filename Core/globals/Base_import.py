@@ -64,7 +64,8 @@ from PyQt6.QtWidgets import (
     QTableWidget,
     QHeaderView,
     QTableWidgetItem,
-    QAbstractItemView
+    QAbstractItemView,
+    QProgressBar
     
 )
 # ==============================================================================
