@@ -1,10 +1,12 @@
 from Core.globals.Base_import import *
 from Core.configs.HelpDialog_Configs import  *
 
+
 class BaseDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setModal(True)
+
 
 class AboutDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -19,6 +21,7 @@ class AboutDialog(BaseDialog):
         close_btn = QPushButton(DialogConstants.CLOSE_BUTTON_TEXT)
         close_btn.clicked.connect(self.accept)
         layout.addWidget(close_btn, alignment=Qt.AlignmentFlag.AlignCenter)
+
 
 class ShortcutsDialog(BaseDialog):
     def __init__(self, keybind_manager, parent=None):
