@@ -1,4 +1,7 @@
 class DialogConstants:
+    # ============================================
+    # ABOUT DIALOG
+    # ============================================
     ABOUT_TITLE = "About PyAutoClicker"
     ABOUT_TEXT = (
         "<h2>PyClicker "
@@ -18,16 +21,27 @@ class DialogConstants:
         "There will be a warning when reaching those limits. "
         "Excessive click speeds can cause the application or your system to become unstable or crash.</p>"
     )
-
+    
+    # ============================================
+    # SHORTCUTS DIALOG \ DIMENSIONS & TEXTS
+    # ============================================
     SHORTCUTS_TITLE = "Keyboard Shortcuts"
     SHORTCUTS_MIN_WIDTH = 500
     SHORTCUTS_MIN_HEIGHT = 500
     SHORTCUTS_HEADER_TEXT = "Double-click on a shortcut to edit it"
+    
+    # ============================================
+    # BUTTON TEXTS
+    # ============================================
     EDIT_TOGGLE_ENABLED_TEXT = "Editing Enabled"
     EDIT_TOGGLE_DISABLED_TEXT = "Enable Editing"
     RESET_BUTTON_TEXT = "Reset to Defaults"
     SAVE_BUTTON_TEXT = "Save Changes"
     CLOSE_BUTTON_TEXT = "Close"
+    
+    # ============================================
+    # CONFIRMATION DIALOGS
+    # ============================================
     RESET_CONFIRM_TITLE = "Reset to Defaults"
     RESET_CONFIRM_TEXT = "Are you sure you want to reset all shortcuts to their default values?"
     SAVE_SUCCESS_TITLE = "Shortcuts Updated"
@@ -36,7 +50,15 @@ class DialogConstants:
     SAVE_ERROR_TEXT = "Failed to save shortcuts: {error}"
     UNSAVED_CHANGES_TITLE = "Unsaved Changes"
     UNSAVED_CHANGES_TEXT = "You have unsaved changes. Save before closing?"
+    
+    # ============================================
+    # EDITING
+    # ============================================
     EDIT_SHORTCUT_TITLE = "Edit Shortcut"
     EDIT_SHORTCUT_PROMPT = "Enter new shortcut for '{action_desc}':\n(Use format like: Ctrl+S, F6, etc.)"
+    
+    # ============================================
+    # SHORTCUTS TABLE
+    # ============================================
     TABLE_HEADERS = ["Description", "Shortcut", "Action"]
     NOT_SET_TEXT = "Not set"

@@ -1,16 +1,21 @@
 from Core.globals.Base_import import *
 
 class DotOverlay_Configs:
+    # ============================================
+    # COLOR DEFINITIONS \ ASSIGNMENTS
+    # ============================================
     RED_SOLID = QColor(255, 0, 0, 220)    
     RED_TRANSLUCENT = QColor(255, 0, 0, 100)  
     WHITE_SOLID = QColor(255, 255, 255, 220)  
     BLACK_SEMI_TRANSPARENT = QColor(0, 0, 0, 180) 
-    
     DOT_COLOR = RED_SOLID
     CROSSHAIR_COLOR = RED_TRANSLUCENT
     TEXT_COLOR = WHITE_SOLID
     TEXT_BG_COLOR = BLACK_SEMI_TRANSPARENT
     
+    # ============================================
+    # DIMENSIONS & SIZING
+    # ============================================
     DOT_RADIUS = 2
     DOT_THICKNESS = 2
     CROSSHAIR_LENGTH = 10
@@ -20,6 +25,9 @@ class DotOverlay_Configs:
     TEXT_OFFSET_X = 15
     TEXT_OFFSET_Y = -25
     
+    # ============================================
+    # WINDOW CONFIGS \ WIDGET ATTRIBUTES \ INIT POSITION
+    # ============================================
     WINDOW_FLAGS = (
         Qt.WindowType.FramelessWindowHint |
         Qt.WindowType.WindowStaysOnTopHint |
