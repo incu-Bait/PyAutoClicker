@@ -2,7 +2,7 @@ from Core.globals.Base_import import *
 from Core.configs.SettingsPanel_Configs import SettingsPanel_Configs
 from Core.managers.KeyBindManager import KeybindManager
 from Core.managers.FileManager import FileManager
-from Core.QWidgets.ui.Settings_Panel_Ui import ClickSettingsUI, TimingSettingsUI, PositionSettingsUI
+from Core.QWidgets.ui.SettingsPanel_Ui import ClickSettingsUI, TimingSettingsUI, PositionSettingsUI
 
 class SettingsPanel(QWidget):
     apply_triggered = pyqtSignal()

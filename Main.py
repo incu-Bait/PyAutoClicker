@@ -1,4 +1,7 @@
-from Core.globals.Base_import import QApplication , sys, pyautogui
+from Core.patch.DPI_Patch import PatchedQt
+PatchedQt.patch_qt_dpi()
+
+from Core.globals.Base_import import QApplication , sys, pyautogui, os
 from Core.MainWindow import PyClicker
 
 def EntryPoint():
