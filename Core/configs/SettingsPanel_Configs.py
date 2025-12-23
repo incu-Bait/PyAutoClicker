@@ -33,7 +33,7 @@ class SettingsPanel_Configs:
     POSITION_LABEL_FORMAT = "Screen Position: {pos}"
     OVERLAY_SHOW_TEXT = "Show Dot"
     OVERLAY_HIDE_TEXT = "Hide Dot"
-    CURSOR_RADIO_TEXT = "Current Cursor Position"
+    CURSOR_RADIO_TEXT = "Current Position"
     FIXED_RADIO_TEXT = "Fixed Position"
     CAPTURE_BUTTON_TEXT = "Capture Current"
     LIVE_CAPTURE_START_TEXT = "Live Capture"
