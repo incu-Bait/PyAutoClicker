@@ -1,22 +1,26 @@
-# ============================================
-# WINDOW CONFIGURATION
-# ============================================
 from Core.globals.Base_import import *
 from PyQt6.QtCore import Qt
 
 class WindowConfig:
+    # ======================
+    # WINDOW GEOMETRY
+    # ======================
     WINDOW_X = 100 
     WINDOW_Y = 100 
     WINDOW_WIDTH = 800
     WINDOW_HEIGHT = 500
     GEOMETRY = (WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT)
+    
+    # ======================
+    # WINDOW PROPERTIES
+    # ======================
     TITLE = "PyClicker"
     WIDGET_RESIZABLE = True
     DEFAULT_THEME = "dark"
-    ICON_PATH = "Assets/PyClickerApp_Logo.ico" 
+    ICON_PATH = "Assets/PyClickerApp_Logo.ico"
 
 
-class QMW_UIConfig:  ## \\ QMW = QMainWindow 
+class QMW_UIConfig:  # QMW = QMainWindow 
     # ======================
     # DEFAULT / APP SETTINGS 
     # ======================
@@ -38,11 +42,28 @@ class QMW_UIConfig:  ## \\ QMW = QMainWindow
     INITIAL_DOCK_WIDTHS = [300, 200]
     
     # ======================
+    # LAYOUT MARGINS
+    # ======================
+    CENTRAL_LAYOUT_MARGIN = 20
+    STATUS_LAYOUT_SPACING = 10
+    
+    # ======================
     # UI OBJECT NAMES
     # ======================
+    CENTRAL_WIDGET_OBJECT_NAME = "centralWidget"
+    STATUS_ICON_OBJECT_NAME = "statusIcon"
     STATUS_LABEL_OBJECT_NAME = "statusLabel"
     COUNT_LABEL_OBJECT_NAME = "countLabel"
     TOGGLE_BUTTON_OBJECT_NAME = "toggleButton"
+    
+    SETTINGS_DOCK_OBJECT_NAME = "settingsDock"
+    HOTKEY_DOCK_OBJECT_NAME = "hotkeyDock"
+    
+    MENUBAR_OBJECT_NAME = "mainMenuBar"
+    FILE_MENU_OBJECT_NAME = "fileMenu"
+    VIEW_MENU_OBJECT_NAME = "viewMenu"
+    THEME_MENU_OBJECT_NAME = "themeMenu"
+    HELP_MENU_OBJECT_NAME = "helpMenu"
     
     # ======================
     # STATUS DISPLAY
@@ -50,6 +71,7 @@ class QMW_UIConfig:  ## \\ QMW = QMainWindow
     STATUS_STOPPED_TEXT = "STOPPED"
     STATUS_RUNNING_TEXT = "RUNNING"
     LAYOUT_RESET_MESSAGE = "Layout reset"
+    COUNT_DEFAULT_TEXT = "Clicks: 0"
     
     # ======================
     # TEXT FORMATS
@@ -62,13 +84,17 @@ class QMW_UIConfig:  ## \\ QMW = QMainWindow
     LOG_TIMESTAMP_FORMAT = "hh:mm:ss"
     
     # ======================
-    # MENU SYSTEM
+    # MENU SYSTEM - TITLES
     # ======================
     MENU_FILE = "&File"
     MENU_VIEW = "&View"
     MENU_THEME = "&Theme"
     MENU_HELP = "&Help"
-
+    
+    # ======================
+    # MENU SYSTEM - ACTIONS
+    # ======================
+    ACTION_EXIT_TEXT = "Exit"
     ACTION_SETTINGS_PANEL_TEXT = "Settings Panel"
     ACTION_LOG_PANEL_TEXT = "Log Panel"
     ACTION_HOTKEY_PANEL_TEXT = "Hotkey Panel"
@@ -76,25 +102,45 @@ class QMW_UIConfig:  ## \\ QMW = QMainWindow
     ACTION_RESET_LAYOUT_TEXT = "Reset Layout"
     ACTION_KEYBOARD_SHORTCUTS_TEXT = "Keyboard Shortcuts"
     ACTION_ABOUT_TEXT = "About PyClicker"
-    ACTION_EXIT_TEXT = "EXIT APP"  
    
     # ======================
-    # DOCK WIDGETS
+    # DOCK WIDGETS - TITLES
     # ======================
     DOCK_SETTINGS_TITLE = "Settings"
     DOCK_HOTKEY_TITLE = "Hotkey"
     DOCK_LOG_TITLE = "Log"
-    # Dock Features \ Combines them \ Allowed areas \ Policy
+    
+    # ======================
+    # DOCK WIDGETS - FEATURES
+    # ======================
     DOCK_MOVABLE = QDockWidget.DockWidgetFeature.DockWidgetMovable
     DOCK_FLOATABLE = QDockWidget.DockWidgetFeature.DockWidgetFloatable
     DOCK_CLOSABLE = QDockWidget.DockWidgetFeature.DockWidgetClosable
-    DOCK_FEATURES = DOCK_MOVABLE | DOCK_FLOATABLE | DOCK_CLOSABLE # \\ Combines
+    DOCK_FEATURES = DOCK_MOVABLE | DOCK_FLOATABLE | DOCK_CLOSABLE
+    
+    # ======================
+    # DOCK WIDGETS - AREAS
+    # ======================
     DOCK_ALLOWED_LEFT_RIGHT = (
         Qt.DockWidgetArea.LeftDockWidgetArea | 
         Qt.DockWidgetArea.RightDockWidgetArea
     )
+    DOCK_AREA_LEFT = Qt.DockWidgetArea.LeftDockWidgetArea
+    DOCK_AREA_RIGHT = Qt.DockWidgetArea.RightDockWidgetArea
+    
+    # ======================
+    # SIZE POLICIES
+    # ======================
     SIZE_POLICY_PREFERRED = QSizePolicy.Policy.Preferred
+    SIZE_POLICY_EXPANDING = QSizePolicy.Policy.Expanding
+    SIZE_POLICY_MINIMUM = QSizePolicy.Policy.Minimum
+    SIZE_POLICY_MAXIMUM = QSizePolicy.Policy.Maximum
+    
+    # ======================
+    # ORIENTATIONS
+    # ======================
     DOCK_HORIZONTAL = Qt.Orientation.Horizontal
+    DOCK_VERTICAL = Qt.Orientation.Vertical
     
     # ======================
     # ICON REFERENCES
@@ -102,12 +148,24 @@ class QMW_UIConfig:  ## \\ QMW = QMainWindow
     ICON_ALTERNATIVE = QStyle.StandardPixmap.SP_ComputerIcon
     STOP_ICON = QStyle.StandardPixmap.SP_MediaPause
     PLAY_ICON = QStyle.StandardPixmap.SP_MediaPlay
-
+    STATUS_ICON_SIZE_RENDER = 16
+    
     # ======================
-    # TODO --> Most if not all these const are unused after removing "LogPanel" 
-    # TODO --> gotta find out for sure before removing any of them 
+    # KEYBIND KEYS
     # ======================
-    # LOG MESSAGES <-- 
+    KEYBIND_EXIT_APP = "exit_app"
+    KEYBIND_TOGGLE_SETTINGS = "toggle_settings"
+    KEYBIND_TOGGLE_HOTKEY = "toggle_hotkey"
+    KEYBIND_TOGGLE_DOT = "toggle_dot"
+    KEYBIND_RESET_LAYOUT = "reset_layout"
+    KEYBIND_SHOW_SHORTCUTS = "show_shortcuts"
+    KEYBIND_SHOW_ABOUT = "show_about"
+    KEYBIND_TOGGLE_CLICKING = "toggle_clicking"
+    
+    # ======================
+    # LOG MESSAGES
+    # NOTE: Some of these may be unused after LogPanel removal
+    # TODO: Verify and remove the unused consts
     # ======================
     LOG_STATUS_STOPPED_KEYWORD = "Stopped"
     LOG_THEME_FORMAT = "Theme: {theme_name}"

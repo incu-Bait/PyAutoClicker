@@ -5,14 +5,17 @@ from Core.managers.FileManager import FileManager
 class ClickSettingsUI:
     def __init__(self, parent: QVBoxLayout):
         self.group = QGroupBox(SettingsPanel_Configs.CLICK_GROUP_TITLE)
+        self.group.setObjectName(SettingsPanel_Configs.CLICK_GROUP_OBJECT_NAME)
         layout = QFormLayout(self.group)
 
         self.button_combo = QComboBox()
+        self.button_combo.setObjectName(SettingsPanel_Configs.BUTTON_COMBO_OBJECT_NAME)
         self.button_combo.addItems(SettingsPanel_Configs.BUTTON_OPTIONS)
 
         self.double_check = QCheckBox(SettingsPanel_Configs.DOUBLE_CLICK_TEXT)
+        self.double_check.setObjectName(SettingsPanel_Configs.DOUBLE_CHECK_OBJECT_NAME)
 
-        layout.addRow("Button:", self.button_combo)
+        layout.addRow(SettingsPanel_Configs.BUTTON_LABEL_TEXT, self.button_combo)
         layout.addRow("", self.double_check)
 
         parent.addWidget(self.group)
@@ -21,9 +24,11 @@ class ClickSettingsUI:
 class TimingSettingsUI:
     def __init__(self, parent: QVBoxLayout):
         self.group = QGroupBox(SettingsPanel_Configs.TIMING_GROUP_TITLE)
+        self.group.setObjectName(SettingsPanel_Configs.TIMING_GROUP_OBJECT_NAME)
         layout = QFormLayout(self.group)
 
         self.interval_spin = QDoubleSpinBox()
+        self.interval_spin.setObjectName(SettingsPanel_Configs.INTERVAL_SPIN_OBJECT_NAME)
         self.interval_spin.setRange(
             SettingsPanel_Configs.MIN_INTERVAL,
             SettingsPanel_Configs.MAX_INTERVAL,
@@ -34,12 +39,13 @@ class TimingSettingsUI:
         self.interval_spin.setSuffix(SettingsPanel_Configs.INTERVAL_SUFFIX)
 
         self.repeat_spin = QSpinBox()
+        self.repeat_spin.setObjectName(SettingsPanel_Configs.REPEAT_SPIN_OBJECT_NAME)
         self.repeat_spin.setRange(0, SettingsPanel_Configs.MAX_REPEAT)
         self.repeat_spin.setValue(0)
         self.repeat_spin.setSpecialValueText(SettingsPanel_Configs.REPEAT_SPECIAL_TEXT)
 
-        layout.addRow("Interval:", self.interval_spin)
-        layout.addRow("Repeat:", self.repeat_spin)
+        layout.addRow(SettingsPanel_Configs.INTERVAL_LABEL_TEXT, self.interval_spin)
+        layout.addRow(SettingsPanel_Configs.REPEAT_LABEL_TEXT, self.repeat_spin)
 
         parent.addWidget(self.group)
 
@@ -47,6 +53,7 @@ class TimingSettingsUI:
 class PositionSettingsUI:
     def __init__(self, parent: QVBoxLayout, file_manager: FileManager):
         self.group = QGroupBox(SettingsPanel_Configs.POSITION_GROUP_TITLE)
+        self.group.setObjectName(SettingsPanel_Configs.POSITION_GROUP_OBJECT_NAME)
         layout = QVBoxLayout(self.group)
 
         top = QHBoxLayout()
@@ -55,8 +62,10 @@ class PositionSettingsUI:
                 pos=SettingsPanel_Configs.INITIAL_POSITION
             )
         )
+        self.pos_label.setObjectName(SettingsPanel_Configs.POSITION_LABEL_OBJECT_NAME)
 
         self.overlay_toggle = QPushButton(SettingsPanel_Configs.OVERLAY_SHOW_TEXT)
+        self.overlay_toggle.setObjectName(SettingsPanel_Configs.OVERLAY_TOGGLE_OBJECT_NAME)
         self.overlay_toggle.setCheckable(True)
 
         top.addWidget(self.pos_label)
@@ -65,8 +74,11 @@ class PositionSettingsUI:
 
         radios = QHBoxLayout()
         self.cursor_radio = QRadioButton(SettingsPanel_Configs.CURSOR_RADIO_TEXT)
+        self.cursor_radio.setObjectName(SettingsPanel_Configs.CURSOR_RADIO_OBJECT_NAME)
         self.cursor_radio.setChecked(True)
+        
         self.fixed_radio = QRadioButton(SettingsPanel_Configs.FIXED_RADIO_TEXT)
+        self.fixed_radio.setObjectName(SettingsPanel_Configs.FIXED_RADIO_OBJECT_NAME)
 
         radios.addWidget(self.cursor_radio)
         radios.addWidget(self.fixed_radio)
@@ -74,23 +86,27 @@ class PositionSettingsUI:
 
         form = QFormLayout()
         self.x_spin = QSpinBox()
+        self.x_spin.setObjectName(SettingsPanel_Configs.X_SPIN_OBJECT_NAME)
         self.x_spin.setRange(0, SettingsPanel_Configs.MAX_POSITION)
         self.x_spin.setValue(SettingsPanel_Configs.INITIAL_POSITION[0])
 
         self.y_spin = QSpinBox()
+        self.y_spin.setObjectName(SettingsPanel_Configs.Y_SPIN_OBJECT_NAME)
         self.y_spin.setRange(0, SettingsPanel_Configs.MAX_POSITION)
         self.y_spin.setValue(SettingsPanel_Configs.INITIAL_POSITION[1])
 
-        form.addRow("X:", self.x_spin)
-        form.addRow("Y:", self.y_spin)
+        form.addRow(SettingsPanel_Configs.X_LABEL_TEXT, self.x_spin)
+        form.addRow(SettingsPanel_Configs.Y_LABEL_TEXT, self.y_spin)
         layout.addLayout(form)
 
         buttons = QHBoxLayout()
         self.capture_btn = QPushButton(SettingsPanel_Configs.CAPTURE_BUTTON_TEXT)
+        self.capture_btn.setObjectName(SettingsPanel_Configs.CAPTURE_BUTTON_OBJECT_NAME)
         capture_shortcut = file_manager.get_keybind("capture_position")
         self.capture_btn.setShortcut(capture_shortcut or QKeySequence())
 
         self.live_capture_btn = QPushButton(SettingsPanel_Configs.LIVE_CAPTURE_START_TEXT)
+        self.live_capture_btn.setObjectName(SettingsPanel_Configs.LIVE_CAPTURE_BUTTON_OBJECT_NAME)
         self.live_capture_btn.setCheckable(True)
         live_shortcut = file_manager.get_keybind("toggle_live_capture")
         self.live_capture_btn.setShortcut(live_shortcut or QKeySequence())

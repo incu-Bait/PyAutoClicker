@@ -29,25 +29,35 @@ class UIManager:
 
     def create_widgets(self) -> None:
         central = QWidget()
+        central.setObjectName(QMW_UIConfig.CENTRAL_WIDGET_OBJECT_NAME)
         self.main_window.setCentralWidget(central)
+        
         main_layout = QVBoxLayout(central)
-        main_layout.setContentsMargins(20, 20, 20, 20)
+        main_layout.setContentsMargins(
+            QMW_UIConfig.CENTRAL_LAYOUT_MARGIN,
+            QMW_UIConfig.CENTRAL_LAYOUT_MARGIN,
+            QMW_UIConfig.CENTRAL_LAYOUT_MARGIN,
+            QMW_UIConfig.CENTRAL_LAYOUT_MARGIN
+        )
 
         # --- Status display ---
         status_layout = QHBoxLayout()
+        
         self.status_icon = QLabel()
+        self.status_icon.setObjectName(QMW_UIConfig.STATUS_ICON_OBJECT_NAME)
         self.status_icon.setFixedSize(
             QMW_UIConfig.STATUS_ICON_SIZE, 
             QMW_UIConfig.STATUS_ICON_SIZE
         )
+        
         self.status_label = QLabel(QMW_UIConfig.STATUS_STOPPED_TEXT)
         self.status_label.setObjectName(QMW_UIConfig.STATUS_LABEL_OBJECT_NAME)
 
         status_layout.addWidget(self.status_icon)
         status_layout.addWidget(self.status_label)
-        status_layout.addSpacing(10)
+        status_layout.addSpacing(QMW_UIConfig.STATUS_LAYOUT_SPACING)
 
-        self.count_label = QLabel("Clicks: 0")
+        self.count_label = QLabel(QMW_UIConfig.COUNT_DEFAULT_TEXT)
         self.count_label.setObjectName(QMW_UIConfig.COUNT_LABEL_OBJECT_NAME)
         status_layout.addWidget(self.count_label)
         status_layout.addStretch()
@@ -69,11 +79,16 @@ class UIManager:
 
     def create_menus(self) -> None:
         menubar = self.main_window.menuBar()
+        menubar.setObjectName(QMW_UIConfig.MENUBAR_OBJECT_NAME)
         
         # --- File menu ---
         file_menu = menubar.addMenu(QMW_UIConfig.MENU_FILE)
-        exit_action = QAction("Exit", self.main_window)
-        exit_shortcut = self.main_window.keybind_manager.get_keybind("exit_app")
+        file_menu.setObjectName(QMW_UIConfig.FILE_MENU_OBJECT_NAME)
+        
+        exit_action = QAction(QMW_UIConfig.ACTION_EXIT_TEXT, self.main_window)
+        exit_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_EXIT_APP
+        )
         if exit_shortcut:
             exit_action.setShortcut(exit_shortcut)
         exit_action.triggered.connect(self.main_window.close)
@@ -81,6 +96,7 @@ class UIManager:
     
         # --- View menu ---
         view_menu = menubar.addMenu(QMW_UIConfig.MENU_VIEW)
+        view_menu.setObjectName(QMW_UIConfig.VIEW_MENU_OBJECT_NAME)
 
         self.settings_toggle = QAction(
             QMW_UIConfig.ACTION_SETTINGS_PANEL_TEXT, 
@@ -88,10 +104,14 @@ class UIManager:
         )
         self.settings_toggle.setCheckable(True)
         self.settings_toggle.setChecked(True)
-        settings_shortcut = self.main_window.keybind_manager.get_keybind("toggle_settings")
+        settings_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_TOGGLE_SETTINGS
+        )
         if settings_shortcut:
             self.settings_toggle.setShortcut(settings_shortcut)
-        self.settings_toggle.triggered.connect(self.main_window.event_handler.toggle_settings_panel)
+        self.settings_toggle.triggered.connect(
+            self.main_window.event_handler.toggle_settings_panel
+        )
         view_menu.addAction(self.settings_toggle)
 
         self.hotkey_toggle = QAction(
@@ -100,29 +120,39 @@ class UIManager:
         )
         self.hotkey_toggle.setCheckable(True)
         self.hotkey_toggle.setChecked(True)
-        hotkey_shortcut = self.main_window.keybind_manager.get_keybind("toggle_hotkey")
+        hotkey_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_TOGGLE_HOTKEY
+        )
         if hotkey_shortcut:
             self.hotkey_toggle.setShortcut(hotkey_shortcut)
-        self.hotkey_toggle.triggered.connect(self.main_window.event_handler.toggle_hotkey_panel)
+        self.hotkey_toggle.triggered.connect(
+            self.main_window.event_handler.toggle_hotkey_panel
+        )
         view_menu.addAction(self.hotkey_toggle)
         view_menu.addSeparator()
 
-        self.dot_toggle = QAction(
-            QMW_UIConfig.ACTION_TOGGLE_DOT_TEXT, 
-            self.main_window
-        )
-        self.dot_toggle.setCheckable(True)
-        dot_shortcut = self.main_window.keybind_manager.get_keybind("toggle_dot")
-        if dot_shortcut:
-            self.dot_toggle.setShortcut(dot_shortcut)
-        self.dot_toggle.triggered.connect(self.main_window.event_handler.toggle_dot_overlay)
-        view_menu.addAction(self.dot_toggle)
+        # # self.dot_toggle = QAction(
+        # #     QMW_UIConfig.ACTION_TOGGLE_DOT_TEXT, 
+        # #     self.main_window
+        # # )
+        # # self.dot_toggle.setCheckable(True)
+        # # dot_shortcut = self.main_window.keybind_manager.get_keybind(
+        # #     QMW_UIConfig.KEYBIND_TOGGLE_DOT
+        # # )
+        # # if dot_shortcut:
+        # #     self.dot_toggle.setShortcut(dot_shortcut)
+        # # self.dot_toggle.triggered.connect(
+        # #     self.main_window.event_handler.toggle_dot_overlay
+        # # )
+        # # view_menu.addAction(self.dot_toggle)
 
         reset_action = QAction(
             QMW_UIConfig.ACTION_RESET_LAYOUT_TEXT, 
             self.main_window
         )
-        reset_shortcut = self.main_window.keybind_manager.get_keybind("reset_layout")
+        reset_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_RESET_LAYOUT
+        )
         if reset_shortcut:
             reset_action.setShortcut(reset_shortcut)
         reset_action.triggered.connect(self.main_window.event_handler.reset_layout)
@@ -130,6 +160,8 @@ class UIManager:
 
         # --- Theme menu ---
         theme_menu = menubar.addMenu(QMW_UIConfig.MENU_THEME)
+        theme_menu.setObjectName(QMW_UIConfig.THEME_MENU_OBJECT_NAME)
+        
         for theme_name in self.theme_manager.get_available_themes():
             action = QAction(theme_name.title(), self.main_window)
             theme_shortcut = self.main_window.keybind_manager.get_keybind(
@@ -142,23 +174,32 @@ class UIManager:
             )
             theme_menu.addAction(action)
 
-        # --- Help menu with shortcuts ---
+        # --- Help menu ---
         help_menu = menubar.addMenu(QMW_UIConfig.MENU_HELP)
+        help_menu.setObjectName(QMW_UIConfig.HELP_MENU_OBJECT_NAME)
+        
         shortcuts_action = QAction(
             QMW_UIConfig.ACTION_KEYBOARD_SHORTCUTS_TEXT, 
             self.main_window
         )
-        shortcuts_shortcut = self.main_window.keybind_manager.get_keybind("show_shortcuts")
+        shortcuts_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_SHOW_SHORTCUTS
+        )
         if shortcuts_shortcut:
             shortcuts_action.setShortcut(shortcuts_shortcut)
-        shortcuts_action.triggered.connect(self.main_window.event_handler.show_keyboard_shortcuts)
+        shortcuts_action.triggered.connect(
+            self.main_window.event_handler.show_keyboard_shortcuts
+        )
         help_menu.addAction(shortcuts_action)
         help_menu.addSeparator()
+        
         about_action = QAction(
             QMW_UIConfig.ACTION_ABOUT_TEXT, 
             self.main_window
         )
-        about_shortcut = self.main_window.keybind_manager.get_keybind("show_about")
+        about_shortcut = self.main_window.keybind_manager.get_keybind(
+            QMW_UIConfig.KEYBIND_SHOW_ABOUT
+        )
         if about_shortcut:
             about_action.setShortcut(about_shortcut)
         about_action.triggered.connect(self.main_window.event_handler.show_about)
@@ -170,6 +211,8 @@ class UIManager:
             QMW_UIConfig.DOCK_SETTINGS_TITLE, 
             self.main_window
         )
+        self.main_window.settings_dock.setObjectName(QMW_UIConfig.SETTINGS_DOCK_OBJECT_NAME)
+        
         self.settings_panel = SettingsPanel(self.theme_manager, self.dot_overlay)
         self.main_window.settings_dock.setWidget(self.settings_panel)
         self.main_window.settings_dock.setFeatures(QMW_UIConfig.DOCK_FEATURES)
@@ -183,14 +226,17 @@ class UIManager:
         self.settings_panel.setMinimumHeight(QMW_UIConfig.SETTINGS_PANEL_MIN_HEIGHT)
         
         self.main_window.addDockWidget(
-            Qt.DockWidgetArea.LeftDockWidgetArea, 
+            QMW_UIConfig.DOCK_AREA_LEFT, 
             self.main_window.settings_dock
         )
+        
         # --- Hotkey dock ---
         self.main_window.hotkey_dock = QDockWidget(
             QMW_UIConfig.DOCK_HOTKEY_TITLE, 
             self.main_window
         )
+        self.main_window.hotkey_dock.setObjectName(QMW_UIConfig.HOTKEY_DOCK_OBJECT_NAME)
+        
         self.hotkey_panel = HotkeyPanel(self.main_window.hotkey)
         self.main_window.hotkey_dock.setWidget(self.hotkey_panel)
         self.main_window.hotkey_dock.setFeatures(QMW_UIConfig.DOCK_FEATURES)
@@ -204,14 +250,16 @@ class UIManager:
         self.hotkey_panel.setMinimumHeight(QMW_UIConfig.HOTKEY_PANEL_MIN_HEIGHT)
         
         self.main_window.addDockWidget(
-            Qt.DockWidgetArea.RightDockWidgetArea, 
+            QMW_UIConfig.DOCK_AREA_RIGHT, 
             self.main_window.hotkey_dock
         )
+        
         self.main_window.resizeDocks(
             [self.main_window.settings_dock, self.main_window.hotkey_dock],
             QMW_UIConfig.INITIAL_DOCK_WIDTHS,
             QMW_UIConfig.DOCK_HORIZONTAL
         )
+        
         central_widget = self.main_window.centralWidget()
         if central_widget:
             central_widget.setMinimumSize(
@@ -221,10 +269,20 @@ class UIManager:
 
     def update_status_ui(self, running: bool) -> None:
         if running:
-            self.status_icon.setPixmap(self.play_icon.pixmap(16, 16))
+            self.status_icon.setPixmap(
+                self.play_icon.pixmap(
+                    QMW_UIConfig.STATUS_ICON_SIZE_RENDER,
+                    QMW_UIConfig.STATUS_ICON_SIZE_RENDER
+                )
+            )
             self.status_label.setText(QMW_UIConfig.STATUS_RUNNING_TEXT)
         else:
-            self.status_icon.setPixmap(self.stop_icon.pixmap(16, 16))
+            self.status_icon.setPixmap(
+                self.stop_icon.pixmap(
+                    QMW_UIConfig.STATUS_ICON_SIZE_RENDER,
+                    QMW_UIConfig.STATUS_ICON_SIZE_RENDER
+                )
+            )
             self.status_label.setText(QMW_UIConfig.STATUS_STOPPED_TEXT)
 
     def update_ui(self, running: bool) -> None:
