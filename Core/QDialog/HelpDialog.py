@@ -189,7 +189,7 @@ class ShortcutsDialog(BaseDialog):
                 DialogConstants.SAVE_ERROR_TITLE,
                 DialogConstants.SAVE_ERROR_TEXT.format(error=str(e))
             )
-
+    
     def closeEvent(self, event):
         if self.changes_made:
             reply = QMessageBox.question(
@@ -200,13 +200,9 @@ class ShortcutsDialog(BaseDialog):
                 QMessageBox.StandardButton.No |
                 QMessageBox.StandardButton.Cancel
             )
-            
             if reply == QMessageBox.StandardButton.Yes:
                 self.save_changes()
-                event.accept()
-            elif reply == QMessageBox.StandardButton.No:
-                event.accept()
-            else:
-                event.ignore()
-        else:
-            event.accept()
+            if reply == QMessageBox.StandardButton.Cancel:
+                return event.ignore()
+
+        event.accept()
