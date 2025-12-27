@@ -3,6 +3,15 @@ class ClickerThread_Configs:
     DEFAULT_RANDOM_RANGE = 0.05
     MIN_SLEEP_TIME = 0.001 
     MAX_SLEEP_TIME = 0.05
+    MOVE_THRESHOLD = 0.01 
+    CPS_UPDATE_INTERVAL = 0.1  
+    PERFORMANCE_THRESHOLD = 0.005 
+    MIN_INTERVAL_LIMIT = 0.0001  
+    CLICK_EMIT_THRESHOLD = 0.01  
+    CLICK_EMIT_FREQUENCY = 10  
     CLICK_MOVE_DURATION = 0
     BUTTONS = ["left", "right", "middle"]
     INITIAL_CLICKS = 0
+    STATUS_STOPPED = "Stopped"
+    STATUS_FINISHED = "Finished (click limit reached)"
+    BUSY_WAIT_CHECK_INTERVAL = 0.0001 
