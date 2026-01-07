@@ -16,6 +16,7 @@ class SettingsPanel(QWidget):
         self.keybind_manager = KeybindManager("KeyBinds/key_binds_data.json")
         self.file_manager = FileManager(self.keybind_manager, self)
         self.main_layout = QVBoxLayout(self)
+        self.main_layout.addStretch()
         self._create_warning()
         self.click_ui = ClickSettingsUI(self.main_layout)
         self.timing_ui = TimingSettingsUI(self.main_layout)

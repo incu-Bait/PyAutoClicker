@@ -164,8 +164,6 @@ class QMW_UIConfig:  # QMW = QMainWindow
     
     # ======================
     # LOG MESSAGES
-    # NOTE: Some of these may be unused after LogPanel removal
-    # TODO: Verify and remove the unused consts
     # ======================
     LOG_STATUS_STOPPED_KEYWORD = "Stopped"
     LOG_THEME_FORMAT = "Theme: {theme_name}"
