@@ -127,6 +127,7 @@ QCheckBox::indicator:checked {
 /* =====================================================================
                                 GROUP BOXES
 ===================================================================== */
+/* -------- DEFAULT (Solid) -------- */
 QGroupBox {
     font-weight: bold;
     border: 2px solid {{border}};
@@ -139,6 +140,20 @@ QGroupBox::title {
     subcontrol-position: top center;
     padding: 0px 6px;
 }
+
+/* -------- DASHED STYLE -------- */
+QGroupBox[dashed="true"] {
+    border: 2px dashed {{border}};
+    border-radius: 0px;
+    margin-top: 1ex;
+    padding-top: 10px;
+}
+QGroupBox[dashed="true"]::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0px 6px;
+}
+
 /* ===============================
    SpinBox \ ComboBox \ DoubleSpinBox
    =============================== */

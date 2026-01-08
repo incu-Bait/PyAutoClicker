@@ -26,12 +26,12 @@ class UIManager:
         self.dot_toggle: Optional[QAction] = None
         self.stop_icon = self.main_window.style().standardIcon(QMW_UIConfig.STOP_ICON)
         self.play_icon = self.main_window.style().standardIcon(QMW_UIConfig.PLAY_ICON)
-
+    
+    #TODO : Make a control panel class instead of hardcoding it in Ui manager
     def create_widgets(self) -> None:
         central = QWidget()
         central.setObjectName(QMW_UIConfig.CENTRAL_WIDGET_OBJECT_NAME)
         self.main_window.setCentralWidget(central)
-        
         main_layout = QVBoxLayout(central)
         main_layout.setContentsMargins(
             QMW_UIConfig.CENTRAL_LAYOUT_MARGIN,
@@ -39,32 +39,37 @@ class UIManager:
             QMW_UIConfig.CENTRAL_LAYOUT_MARGIN,
             QMW_UIConfig.CENTRAL_LAYOUT_MARGIN
         )
+        toggle_frame = QGroupBox("Control Panel")
+        toggle_frame.setProperty("dashed", True) # \\ Custom dashed lines for frame
+        toggle_frame.style().unpolish(toggle_frame)
+        toggle_frame.style().polish(toggle_frame)
+        toggle_frame.update()
 
-        # --- Status display ---
+        toggle_layout = QVBoxLayout(toggle_frame)
+        toggle_layout.setSpacing(15)
+        toggle_layout.setContentsMargins(15, 20, 15, 15)
         status_layout = QHBoxLayout()
-        
         self.status_icon = QLabel()
         self.status_icon.setObjectName(QMW_UIConfig.STATUS_ICON_OBJECT_NAME)
         self.status_icon.setFixedSize(
             QMW_UIConfig.STATUS_ICON_SIZE, 
             QMW_UIConfig.STATUS_ICON_SIZE
         )
-        
         self.status_label = QLabel(QMW_UIConfig.STATUS_STOPPED_TEXT)
         self.status_label.setObjectName(QMW_UIConfig.STATUS_LABEL_OBJECT_NAME)
-
         status_layout.addWidget(self.status_icon)
         status_layout.addWidget(self.status_label)
         status_layout.addSpacing(QMW_UIConfig.STATUS_LAYOUT_SPACING)
-
         self.count_label = QLabel(QMW_UIConfig.COUNT_DEFAULT_TEXT)
         self.count_label.setObjectName(QMW_UIConfig.COUNT_LABEL_OBJECT_NAME)
         status_layout.addWidget(self.count_label)
         status_layout.addStretch()
-
-        main_layout.addLayout(status_layout)
+        toggle_layout.addLayout(status_layout)
         self.update_status_ui(False)
-
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setFrameShadow(QFrame.Shadow.Sunken)
+        toggle_layout.addWidget(separator)
         # --- Main toggle button ---
         self.toggle_btn = QPushButton(
             QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(
@@ -73,8 +78,8 @@ class UIManager:
         )
         self.toggle_btn.setObjectName(QMW_UIConfig.TOGGLE_BUTTON_OBJECT_NAME)
         self.toggle_btn.setMinimumHeight(QMW_UIConfig.TOGGLE_BUTTON_MIN_HEIGHT)
-        main_layout.addWidget(self.toggle_btn)
-
+        toggle_layout.addWidget(self.toggle_btn)
+        main_layout.addWidget(toggle_frame)
         main_layout.addStretch()
 
     def create_menus(self) -> None:
@@ -130,21 +135,6 @@ class UIManager:
         )
         view_menu.addAction(self.hotkey_toggle)
         view_menu.addSeparator()
-
-        # # self.dot_toggle = QAction(
-        # #     QMW_UIConfig.ACTION_TOGGLE_DOT_TEXT, 
-        # #     self.main_window
-        # # )
-        # # self.dot_toggle.setCheckable(True)
-        # # dot_shortcut = self.main_window.keybind_manager.get_keybind(
-        # #     QMW_UIConfig.KEYBIND_TOGGLE_DOT
-        # # )
-        # # if dot_shortcut:
-        # #     self.dot_toggle.setShortcut(dot_shortcut)
-        # # self.dot_toggle.triggered.connect(
-        # #     self.main_window.event_handler.toggle_dot_overlay
-        # # )
-        # # view_menu.addAction(self.dot_toggle)
 
         reset_action = QAction(
             QMW_UIConfig.ACTION_RESET_LAYOUT_TEXT, 

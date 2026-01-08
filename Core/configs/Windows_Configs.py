@@ -7,8 +7,8 @@ class WindowConfig:
     # ======================
     WINDOW_X = 100 
     WINDOW_Y = 100 
-    WINDOW_WIDTH = 800
-    WINDOW_HEIGHT = 500
+    WINDOW_WIDTH = 900
+    WINDOW_HEIGHT = 510
     GEOMETRY = (WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT)
     
     # ======================
