@@ -10,6 +10,8 @@
 
 ---
 
+<img width="903" height="539" alt="Screenshot 2026-01-07 201831" src="https://github.com/user-attachments/assets/43964091-5ec2-490d-a2e2-468bd8dd91b9" />
+
 ## **What To Expect**
 
 <div align="center">
@@ -52,6 +54,6 @@ pip install PyQt6 pyautogui keyboard
 
 ---
 [![Python](https://img.shields.io/badge/Python_3.10+-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://python.org)
-[![PyQt6](https://img.shields.io/badge/PyQt6_GUI-FF6B35?style=for-the-badge&logo=qt&logoColor=white)](https://www.pythonguis.com/pyqt6/)
+[![PyQt6](https://img.shields.io/badge/PyQt6_GUI-3572A5?style=for-the-badge&logo=qt&logoColor=FFE873)](https://www.pythonguis.com/pyqt6/)
 [![Windows](https://img.shields.io/badge/Windows_Only-0078D6?style=for-the-badge&logo=windows&logoColor=white)]()
 [![License](https://img.shields.io/badge/LICENSE-MIT-8A2BE2?style=for-the-badge)](LICENSE)
