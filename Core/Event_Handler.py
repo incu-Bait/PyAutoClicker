@@ -8,7 +8,8 @@
 
 from Core.globals.Base_import import QDateTime, keyboard, QAction
 from Core.configs.Theme_Configs import DEFAULT_THEME
-from Core.QDialog.HelpDialog import ShortcutsDialog, AboutDialog
+from Core.QDialog.ShortcutsDialog import ShortcutsDialog
+from Core.QDialog.AboutDialog import AboutDialog
 from Core.configs.Windows_Configs import QMW_UIConfig
 
 class QMW_EventHandler:
