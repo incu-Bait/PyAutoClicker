@@ -44,8 +44,6 @@ class UIManager:
     def _create_control_panel(self) -> QGroupBox:
         frame = QGroupBox("Control Panel")
         frame.setProperty("dashed", True)
-        frame.style().unpolish(frame)
-        frame.style().polish(frame)
         frame.update()
 
         layout = QVBoxLayout(frame)
