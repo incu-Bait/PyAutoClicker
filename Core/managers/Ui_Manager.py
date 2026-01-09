@@ -27,7 +27,10 @@ class UIManager:
         self.stop_icon = self.main_window.style().standardIcon(QMW_UIConfig.STOP_ICON)
         self.play_icon = self.main_window.style().standardIcon(QMW_UIConfig.PLAY_ICON)
 
-    # ----------------- Widget Creation ----------------- 
+    # ----------------- Widget Creation -----------------
+    # NOTE : Control Panel is made and handle here, 
+    # Prob should make a QWidget class for it 
+    # ---------------------------------------------------
     def create_widgets(self) -> None:
         central = QWidget()
         central.setObjectName(QMW_UIConfig.CENTRAL_WIDGET_OBJECT_NAME)
