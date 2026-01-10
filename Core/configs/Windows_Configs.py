@@ -20,7 +20,7 @@ class WindowConfig:
     ICON_PATH = "Assets/PyClickerApp_Logo.ico"
 
 
-class QMW_UIConfig:  # QMW = QMainWindow 
+class QMW_UIConfig: # \\ QMW = QMainWindow 
     # ======================
     # DEFAULT / APP SETTINGS 
     # ======================

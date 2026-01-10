@@ -5,6 +5,7 @@ from Core.QWidgets.DotOverlay import ScreenDotOverlay
 from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.QWidgets.SettingsPanel import SettingsPanel
 from Core.QWidgets.HotKeyPanel import HotkeyPanel
+from Core.QWidgets.ControlPanel import ControlPanel
 
 
 class UIManager:
@@ -14,23 +15,14 @@ class UIManager:
         self.dot_overlay = ScreenDotOverlay()
         self.settings_panel: Optional[SettingsPanel] = None
         self.hotkey_panel: Optional[HotkeyPanel] = None
+        self.control_panel: Optional[ControlPanel] = None
         self.is_settings_visible = True
         self.is_hotkey_visible = True
         self.is_dot_visible = False
-        self.toggle_btn: Optional[QPushButton] = None
-        self.status_icon: Optional[QLabel] = None
-        self.status_label: Optional[QLabel] = None
-        self.count_label: Optional[QLabel] = None
         self.settings_toggle: Optional[QAction] = None
         self.hotkey_toggle: Optional[QAction] = None
         self.dot_toggle: Optional[QAction] = None
-        self.stop_icon = self.main_window.style().standardIcon(QMW_UIConfig.STOP_ICON)
-        self.play_icon = self.main_window.style().standardIcon(QMW_UIConfig.PLAY_ICON)
 
-    # ----------------- Widget Creation -----------------
-    # NOTE : Control Panel is made and handle here, 
-    # Prob should make a QWidget class for it 
-    # ---------------------------------------------------
     def create_widgets(self) -> None:
         central = QWidget()
         central.setObjectName(QMW_UIConfig.CENTRAL_WIDGET_OBJECT_NAME)
@@ -50,50 +42,11 @@ class UIManager:
         frame.update()
 
         layout = QVBoxLayout(frame)
-        layout.setSpacing(15)
-        layout.setContentsMargins(15, 20, 15, 15)
-
-        layout.addLayout(self._create_status_layout())
-        layout.addWidget(self._create_separator())
-        self.toggle_btn = self._create_toggle_button()
-        layout.addWidget(self.toggle_btn)
+        self.control_panel = ControlPanel(self.main_window)
+        layout.addWidget(self.control_panel)
 
         return frame
 
-    def _create_status_layout(self) -> QHBoxLayout:
-        layout = QHBoxLayout()
-        self.status_icon = QLabel()
-        self.status_icon.setObjectName(QMW_UIConfig.STATUS_ICON_OBJECT_NAME)
-        self.status_icon.setFixedSize(QMW_UIConfig.STATUS_ICON_SIZE, QMW_UIConfig.STATUS_ICON_SIZE)
-
-        self.status_label = QLabel(QMW_UIConfig.STATUS_STOPPED_TEXT)
-        self.status_label.setObjectName(QMW_UIConfig.STATUS_LABEL_OBJECT_NAME)
-
-        self.count_label = QLabel(QMW_UIConfig.COUNT_DEFAULT_TEXT)
-        self.count_label.setObjectName(QMW_UIConfig.COUNT_LABEL_OBJECT_NAME)
-
-        layout.addWidget(self.status_icon)
-        layout.addWidget(self.status_label)
-        layout.addSpacing(QMW_UIConfig.STATUS_LAYOUT_SPACING)
-        layout.addWidget(self.count_label)
-        layout.addStretch()
-
-        self.update_status_ui(False)
-        return layout
-
-    def _create_separator(self) -> QFrame:
-        sep = QFrame()
-        sep.setFrameShape(QFrame.Shape.HLine)
-        sep.setFrameShadow(QFrame.Shadow.Sunken)
-        return sep
-
-    def _create_toggle_button(self) -> QPushButton:
-        btn = QPushButton(QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=self.main_window.hotkey.upper()))
-        btn.setObjectName(QMW_UIConfig.TOGGLE_BUTTON_OBJECT_NAME)
-        btn.setMinimumHeight(QMW_UIConfig.TOGGLE_BUTTON_MIN_HEIGHT)
-        return btn
-
-    # ----------------- Menu Creation ----------------- 
     def create_menus(self) -> None:
         menubar = self.main_window.menuBar()
         menubar.setObjectName(QMW_UIConfig.MENUBAR_OBJECT_NAME)
@@ -181,7 +134,6 @@ class UIManager:
         action.triggered.connect(callback)
         return action
 
-    # ----------------- Dock Creation ----------------- 
     def create_docks(self) -> None:
         self._create_settings_dock()
         self._create_hotkey_dock()
@@ -206,11 +158,9 @@ class UIManager:
         self.main_window.settings_dock.setWidget(self.settings_panel)
         self.main_window.settings_dock.setFeatures(QMW_UIConfig.DOCK_FEATURES)
         self.main_window.settings_dock.setAllowedAreas(QMW_UIConfig.DOCK_ALLOWED_LEFT_RIGHT)
-
         self.settings_panel.setSizePolicy(QMW_UIConfig.SIZE_POLICY_PREFERRED, QMW_UIConfig.SIZE_POLICY_PREFERRED)
         self.settings_panel.setMinimumWidth(QMW_UIConfig.SETTINGS_PANEL_MIN_WIDTH)
         self.settings_panel.setMinimumHeight(QMW_UIConfig.SETTINGS_PANEL_MIN_HEIGHT)
-
         self.main_window.addDockWidget(QMW_UIConfig.DOCK_AREA_LEFT, self.main_window.settings_dock)
 
     def _create_hotkey_dock(self):
@@ -220,33 +170,22 @@ class UIManager:
         self.main_window.hotkey_dock.setWidget(self.hotkey_panel)
         self.main_window.hotkey_dock.setFeatures(QMW_UIConfig.DOCK_FEATURES)
         self.main_window.hotkey_dock.setAllowedAreas(QMW_UIConfig.DOCK_ALLOWED_LEFT_RIGHT)
-
         self.hotkey_panel.setSizePolicy(QMW_UIConfig.SIZE_POLICY_PREFERRED, QMW_UIConfig.SIZE_POLICY_PREFERRED)
         self.hotkey_panel.setMinimumWidth(QMW_UIConfig.HOTKEY_PANEL_MIN_WIDTH)
         self.hotkey_panel.setMinimumHeight(QMW_UIConfig.HOTKEY_PANEL_MIN_HEIGHT)
-
         self.main_window.addDockWidget(QMW_UIConfig.DOCK_AREA_RIGHT, self.main_window.hotkey_dock)
 
-    # ----------------- UI Updates ----------------- 
-    def update_status_ui(self, running: bool) -> None:
-        icon = self.play_icon if running else self.stop_icon
-        text = QMW_UIConfig.STATUS_RUNNING_TEXT if running else QMW_UIConfig.STATUS_STOPPED_TEXT
-        self.status_icon.setPixmap(icon.pixmap(QMW_UIConfig.STATUS_ICON_SIZE_RENDER, QMW_UIConfig.STATUS_ICON_SIZE_RENDER))
-        self.status_label.setText(text)
-
     def update_ui(self, running: bool) -> None:
-        self.toggle_btn.setText(
-            QMW_UIConfig.TOGGLE_STOP_TEXT_FORMAT.format(hotkey=self.main_window.hotkey.upper())
-            if running else
-            QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=self.main_window.hotkey.upper())
-        )
-        self.update_status_ui(running)
+        if self.control_panel:
+            self.control_panel.update_ui(running)
+            self.control_panel.update_status_ui(running)
 
     def update_count_ui(self, count: int) -> None:
-        self.count_label.setText(QMW_UIConfig.COUNT_LABEL_FORMAT.format(count=count))
+        if self.control_panel:
+            self.control_panel.update_count_ui(count)
 
     def update_hotkey_ui(self, hotkey: str) -> None:
-        hotkey_upper = hotkey.upper()
-        self.toggle_btn.setText(QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey_upper))
+        if self.control_panel:
+            self.control_panel.update_hotkey_ui(hotkey)
         if self.hotkey_panel:
-            self.hotkey_panel.current_label.setText(QMW_UIConfig.CURRENT_HOTKEY_LABEL_FORMAT.format(hotkey=hotkey_upper))
+            self.hotkey_panel.current_label.setText(QMW_UIConfig.CURRENT_HOTKEY_LABEL_FORMAT.format(hotkey=hotkey.upper()))

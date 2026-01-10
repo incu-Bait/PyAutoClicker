@@ -1,4 +1,4 @@
-class KeybindConstants:
+class KeybindConfigs:
 # ============================================
 # FILE \ CONFIG \ OPERATION MSG \ DEFAULT & DISPLAY 
 # ============================================

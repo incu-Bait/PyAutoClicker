@@ -7,6 +7,7 @@ from Core.managers.Ui_Manager import UIManager
 from Core.managers.WindowManager import WindowManager
 from Core.Event_Handler import QMW_EventHandler
 
+
 class PyClicker(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,10 +23,10 @@ class PyClicker(QMainWindow):
         self.ui_manager.create_menus()
         self.ui_manager.create_docks()
         self._setup_connections()
-        self.event_handler._apply_initial_theme()
+        self.event_handler.apply_initial_theme()
         
     def _setup_connections(self):
-        self.ui_manager.toggle_btn.clicked.connect(self.event_handler.toggle_clicking)
+        self.ui_manager.control_panel.toggle_button.clicked.connect(self.event_handler.toggle_clicking)
         self.ui_manager.settings_panel.apply_triggered.connect(self.event_handler.apply_settings)
         self.ui_manager.hotkey_panel.hotkey_changed.connect(self.event_handler.change_hotkey)
         self.clicker.click_count_update.connect(self.event_handler.on_count)
@@ -36,6 +37,8 @@ class PyClicker(QMainWindow):
         # ---- Clean up ----
         self.clicker.is_running = False
         if self.clicker.isRunning():
+# \\ this is pointless i dont know why we waiting .
+# .. i really do suck at coding ...
             self.clicker.wait(1000)
         self.ui_manager.dot_overlay.hide_overlay()
         event.accept()

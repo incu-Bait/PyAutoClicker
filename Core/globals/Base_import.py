@@ -69,7 +69,8 @@ from PyQt6.QtWidgets import (
     QHeaderView,
     QTableWidgetItem,
     QAbstractItemView,
-    QProgressBar
+    QProgressBar,
+    QGraphicsDropShadowEffect,
     
 )
 # ==============================================================================
@@ -91,7 +92,8 @@ from PyQt6.QtCore import (
     QBuffer,
     QByteArray,
     QSettings,
-    QFileSystemWatcher
+    QFileSystemWatcher,
+    QMargins
     
 )
 # ==============================================================================
