@@ -53,14 +53,18 @@ class Animation:
     
     # ===================================
     # Methods i can use for the frame 
-    # to change color, cycle throght set colors 
-    # and if i wannt to i can add more effects 
+    # to change color, cycle throgh set colors 
+    # and if i want i can add more effects here
+    # shouldnt really need to leave this file
+    # if i end up making more depending on 
+    # what they are. KEEP IT SIMPLE.
+    # ----------------------------------- 
     # Example --> .setProperty("dashed", True)
     # Example --> .set_preset_pattern("dotted") 
     # Example --> .set_dash_pattern([1, 3])  
     # Example --> .set_preset_color("yellow") 
     # Example --> .set_animation_speed(2.0)  
-    # Example --> .set_color_cycle (#Color1 , #Color2, #Color3)interval)  
+    # Example --> .set_color_cycle (#Color1 , #Color2, #Color3)interval) # \\ Hex Format 
     # ===================================
     def set_color_cycle(self, colors: list, interval: int = 1000, enabled: bool = True):
         self._color_cycle = colors
