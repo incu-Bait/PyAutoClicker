@@ -125,7 +125,7 @@ QCheckBox::indicator:checked {
     background-color: {{accent}};
 }
 /* =====================================================================
-                                GROUP BOXES
+                                GROUP BOX
 ===================================================================== */
 /* -------- DEFAULT (Solid) -------- */
 QGroupBox {
@@ -153,14 +153,15 @@ QGroupBox[dashed="true"]::title {
     subcontrol-position: top center;
     padding: 0px 6px;
 }
+QGroupBox[pygroupbox="true"] {
+    border: none; 
+    margin-top: 1.2ex;
+    padding-top: 10px;
+}
 
 /* ===============================
-   SpinBox \ ComboBox \ DoubleSpinBox
+   SpinBox \ DoubleSpinBox
    =============================== */
-QComboBox {
-    background-color: {{bg_tertiary}};
-    color: {{text_primary}};
-}
 QSpinBox{
     background-color: {{bg_tertiary}};
     color: {{text_primary}};
@@ -170,8 +171,12 @@ QDoubleSpinBox{
     color: {{text_primary}};
 }
 /* =====================================================================
-                            COMBO BOX ITEM VIEW
+                            COMBO BOX 
 ===================================================================== */
+QComboBox {
+    background-color: {{bg_tertiary}};
+    color: {{text_primary}};
+}
 QComboBox QAbstractItemView {
     background-color: {{bg_secondary}};
     border: 2px solid {{border}};

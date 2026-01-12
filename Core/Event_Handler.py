@@ -6,11 +6,12 @@
 # OR it should at lease ... 
 # ============================================
 
-from Core.globals.Base_import import QDateTime, keyboard, QAction
+from Core.globals.Base_import import keyboard, QAction
 from Core.configs.Theme_Configs import DEFAULT_THEME
 from Core.QDialog.ShortcutsDialog import ShortcutsDialog
 from Core.QDialog.AboutDialog import AboutDialog
 from Core.configs.Windows_Configs import QMW_UIConfig
+from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
 
 
 class QMW_EventHandler:
@@ -25,6 +26,7 @@ class QMW_EventHandler:
     def apply_theme(self, theme_name):
         if not self.main.theme_manager.set_theme(theme_name):
             return
+        
         stylesheet = self.main.theme_manager.PyStyleSheet(theme_name)
         self.main.setStyleSheet(stylesheet)
         message = QMW_UIConfig.THEME_CHANGE_MESSAGE_FORMAT.format(
@@ -32,8 +34,12 @@ class QMW_EventHandler:
         )
         self.main.statusBar().showMessage(message)
         self.main.update()
+        
         if hasattr(self.main.ui_manager, 'settings_panel'): 
             self.main.ui_manager.settings_panel.update()
+
+        for widget in self.main.findChildren(PyGroupBox):
+            widget.update_theme(self.main.theme_manager)
 
     # ----------------- Settings Management -----------------
     
@@ -54,15 +60,11 @@ class QMW_EventHandler:
             keyboard.remove_hotkey(self.main.hotkey)
             keyboard.add_hotkey(hotkey.lower(), self.toggle_clicking)
             self.main.hotkey = hotkey
-            
-            # Update UI and configuration
             self.main.ui_manager.update_hotkey_ui(hotkey)
             self.main.keybind_manager.keybinds[QMW_UIConfig.KEYBIND_TOGGLE_CLICKING] = hotkey.upper()
             self.main.keybind_manager.save_keybinds_to_file()
-            
             message = QMW_UIConfig.LOG_HOTKEY_CHANGED_FORMAT.format(hotkey=hotkey.upper())
             self.main.statusBar().showMessage(message)
-            
         except Exception as e:
             error_message = QMW_UIConfig.LOG_HOTKEY_FAILED_FORMAT.format(error=str(e))
             self.main.statusBar().showMessage(error_message)

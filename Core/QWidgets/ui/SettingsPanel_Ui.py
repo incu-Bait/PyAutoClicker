@@ -1,17 +1,19 @@
 from Core.globals.Base_import import *
 from Core.configs.SettingsPanel_Configs import SettingsPanel_Configs
 from Core.managers.FileManager import FileManager
+from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+
 
 class ClickSettingsUI:
     def __init__(self, parent: QVBoxLayout):
-        self.group = QGroupBox(SettingsPanel_Configs.CLICK_GROUP_TITLE)
+        self.group = PyGroupBox(SettingsPanel_Configs.CLICK_GROUP_TITLE)
         self.group.setObjectName(SettingsPanel_Configs.CLICK_GROUP_OBJECT_NAME)
+        self.group.setCursor(SettingsPanel_Configs.TOGGLE_BUTTON_CURSOR)
         layout = QFormLayout(self.group)
 
         self.button_combo = QComboBox()
         self.button_combo.setObjectName(SettingsPanel_Configs.BUTTON_COMBO_OBJECT_NAME)
         self.button_combo.addItems(SettingsPanel_Configs.BUTTON_OPTIONS)
-
         self.double_check = QCheckBox(SettingsPanel_Configs.DOUBLE_CLICK_TEXT)
         self.double_check.setObjectName(SettingsPanel_Configs.DOUBLE_CHECK_OBJECT_NAME)
 
@@ -23,8 +25,9 @@ class ClickSettingsUI:
 
 class TimingSettingsUI:
     def __init__(self, parent: QVBoxLayout):
-        self.group = QGroupBox(SettingsPanel_Configs.TIMING_GROUP_TITLE)
+        self.group = PyGroupBox(SettingsPanel_Configs.TIMING_GROUP_TITLE)
         self.group.setObjectName(SettingsPanel_Configs.TIMING_GROUP_OBJECT_NAME)
+        self.group.setCursor(SettingsPanel_Configs.TOGGLE_BUTTON_CURSOR)        
         layout = QFormLayout(self.group)
 
         self.interval_spin = QDoubleSpinBox()
@@ -52,8 +55,9 @@ class TimingSettingsUI:
 
 class PositionSettingsUI:
     def __init__(self, parent: QVBoxLayout, file_manager: FileManager):
-        self.group = QGroupBox(SettingsPanel_Configs.POSITION_GROUP_TITLE)
+        self.group = PyGroupBox(SettingsPanel_Configs.POSITION_GROUP_TITLE)
         self.group.setObjectName(SettingsPanel_Configs.POSITION_GROUP_OBJECT_NAME)
+        self.group.setCursor(SettingsPanel_Configs.TOGGLE_BUTTON_CURSOR)        
         layout = QVBoxLayout(self.group)
 
         top = QHBoxLayout()

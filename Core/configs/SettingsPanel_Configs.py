@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 
+
 class SettingsPanel_Configs:
     # ============================================
     # UI DIMENSIONS
@@ -126,3 +127,8 @@ class SettingsPanel_Configs:
     # ============================================
     SIZE_POLICY_PREFERRED = QSizePolicy.Policy.Preferred
     SIZE_POLICY_EXPANDING = QSizePolicy.Policy.Expanding
+
+    # ============================================
+    # CURSOR
+    # ============================================
+    TOGGLE_BUTTON_CURSOR = Qt.CursorShape.PointingHandCursor

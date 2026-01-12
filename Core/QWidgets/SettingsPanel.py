@@ -4,6 +4,7 @@ from Core.managers.KeyBindManager import KeybindManager
 from Core.managers.FileManager import FileManager
 from Core.QWidgets.ui.SettingsPanel_Ui import ClickSettingsUI, TimingSettingsUI, PositionSettingsUI
 
+
 class SettingsPanel(QWidget):
     apply_triggered = pyqtSignal()
     position_updated = pyqtSignal(int, int)

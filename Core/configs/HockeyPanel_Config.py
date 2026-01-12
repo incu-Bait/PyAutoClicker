@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 
+
 class HotkeyPanelConfig:
     # ======================
     # DEFAULT SETTINGS
@@ -33,3 +34,8 @@ class HotkeyPanelConfig:
     # ======================
     CURRENT_LABEL_SIZE_POLICY_H = QSizePolicy.Policy.Maximum
     CURRENT_LABEL_SIZE_POLICY_V = QSizePolicy.Policy.Preferred
+
+    # ============================================
+    # CURSOR
+    # ============================================
+    TOGGLE_BUTTON_CURSOR = Qt.CursorShape.PointingHandCursor

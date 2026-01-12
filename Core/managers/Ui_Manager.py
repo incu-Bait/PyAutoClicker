@@ -6,6 +6,7 @@ from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.QWidgets.SettingsPanel import SettingsPanel
 from Core.QWidgets.HotKeyPanel import HotkeyPanel
 from Core.QWidgets.ControlPanel import ControlPanel
+from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
 
 
 class UIManager:
@@ -36,9 +37,8 @@ class UIManager:
         main_layout.addWidget(toggle_frame)
         main_layout.addStretch()
 
-    def _create_control_panel(self) -> QGroupBox:
-        frame = QGroupBox("Control Panel")
-        frame.setProperty("dashed", True)
+    def _create_control_panel(self) -> PyGroupBox:
+        frame = PyGroupBox(title="Control Panel")
         frame.update()
 
         layout = QVBoxLayout(frame)

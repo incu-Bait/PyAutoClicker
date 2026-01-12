@@ -1,5 +1,7 @@
 from Core.globals.Base_import import *
 from Core.configs.HockeyPanel_Config import *
+from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+
 
 class HotkeyPanel(QWidget):
     hotkey_changed = pyqtSignal(str)
@@ -11,8 +13,9 @@ class HotkeyPanel(QWidget):
 
         layout = QVBoxLayout(self)
 
-        self.group = QGroupBox(HotkeyPanelConfig.GROUP_BOX_TITLE)
+        self.group = PyGroupBox(HotkeyPanelConfig.GROUP_BOX_TITLE)
         self.group.setObjectName(HotkeyPanelConfig.GROUP_BOX_OBJECT_NAME)
+        self.group.setCursor(HotkeyPanelConfig.TOGGLE_BUTTON_CURSOR)
         group_layout = QVBoxLayout(self.group)
 
         # --- Current hotkey ---
