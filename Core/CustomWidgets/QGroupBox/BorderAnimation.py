@@ -53,7 +53,7 @@ class Animation:
     
     # ===================================
     # Methods i can use for the frame 
-    # to change color, cycle throgh set colors 
+    # to change color, cycle through set colors 
     # and if i want i can add more effects here
     # shouldnt really need to leave this file
     # if i end up making more depending on 
