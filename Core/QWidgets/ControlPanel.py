@@ -102,6 +102,12 @@ class ControlPanel(QWidget):
         self._is_running = running
         self._update_toggle_button_text(running)
         self._update_status_icon_and_label(running)
+        self.toggle_button.setEnabled(not running)
+        
+        if running:
+            self.toggle_button.setCursor(Qt.CursorShape.BusyCursor)
+        else:
+            self.toggle_button.setCursor(ControlPanel_Config.TOGGLE_BUTTON_CURSOR)
         
     def update_status_ui(self, running: bool) -> None:
         self._is_running = running

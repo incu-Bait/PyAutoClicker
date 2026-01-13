@@ -3,7 +3,7 @@
 
 <div align="center">
 <h2 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=50&duration=4000&pause=1000&color=0000FF&center=true&vCenter=true&width=500&lines=PyAutoClicker" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=50&duration=4000&pause=8000&color=0000FF&center=true&vCenter=true&width=500&lines=PyAutoClicker" alt="Typing SVG" />
 </h2>
 
 ### *Simple Auto Clicker App Made With Python | PyQt6 GUI Library*
@@ -25,35 +25,58 @@
 |  **Live Position Capture** | Real time cursor position tracking |
 |  **Multiple Click Types** | Left, Right, Middle & Double-click | 
 |  **Settings Panel** | Toggle and Fine tune click parameters  | 
+|  **Dockable Panels** | Drag around Panels & Adjust layout  | 
 </div>
+
+---
 
 <div align="center">
 
+<fieldset>
+  
+## How to Clone and Run Repo 
+
+#### ↓ Clone Repo ↓
+```bash
+git clone https://github.com/incu-Bait/PyAutoClicker.git
+```
+#### Than Run this file → [Main.py](Main.py)
+
+</fieldset>
+
 <h2 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=FFFF00&center=true&vCenter=true&width=500&lines=Prerequisites" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=8000&color=FFFF00&center=true&vCenter=true&width=500&lines=Prerequisites" alt="Typing SVG" />
 </h2>
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" />
   <div style="text-align: left;">
-    <h3 style="margin: 0; color:">Python 3.8+</h3>
-    <p style="margin: 5px 0 0 0; color: #CCCCCC; font-size: 0.9em;">Required Version</p>
+    <h3 style="margin: 0; color:">Python 3.14 </h3>
   </div>
 </div>
 
----
+## Required Packages / pip installs
 
 ```python
-# Required Packages
+# ==== Imports you will need ====
 import PyQt6
 import pyautogui
 import keyboard
 ```
+
 ```bash
-pip install PyQt6 pyautogui keyboard
+pip install PyQt6  
+```
+
+```bash
+pip install pyautogui
+```
+
+```bash
+pip install keyboard
 ```
 
 ---
-[![Python](https://img.shields.io/badge/Python_3.10+-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://python.org)
 [![PyQt6](https://img.shields.io/badge/PyQt6_GUI-3572A5?style=for-the-badge&logo=qt&logoColor=FFE873)](https://www.pythonguis.com/pyqt6/)
 [![Windows](https://img.shields.io/badge/Windows_Only-0078D6?style=for-the-badge&logo=windows&logoColor=white)]()
 [![License](https://img.shields.io/badge/LICENSE-MIT-8A2BE2?style=for-the-badge)](LICENSE)
