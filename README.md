@@ -32,8 +32,8 @@
 
 <div align="center">
 
-<fieldset>
-  
+<hr style="border: 10px solid #000000;">
+
 ## How to Clone and Run Repo 
 
 #### ↓ Clone Repo ↓
@@ -41,8 +41,7 @@
 git clone https://github.com/incu-Bait/PyAutoClicker.git
 ```
 #### Than Run this file → [Main.py](Main.py)
-
-</fieldset>
+<hr style="border: 10px solid #000000;">
 
 <h2 align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=8000&color=FFFF00&center=true&vCenter=true&width=500&lines=Prerequisites" alt="Typing SVG" />
