@@ -1,6 +1,6 @@
 # =================================================================
-# QMW (QMainWindow) Event Handler is a
-# centralized event handler for all application events
+# QMW_EventHandler = (QMainWindow)
+# Centralized event handler for all application events
 # and funnels to appropriate managers while handling UI coordination
 # ===================================================================
 from Core.globals.Base_import import keyboard, QAction
