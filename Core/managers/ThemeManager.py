@@ -1,6 +1,7 @@
 from Core.globals.Base_import import *
 from Core.configs.Theme_Configs import *
 
+
 class PyStyleSheet:
     @staticmethod
     def generate(theme: Dict[str, str]) -> str:

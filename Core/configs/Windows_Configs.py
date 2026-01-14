@@ -1,6 +1,7 @@
 from Core.globals.Base_import import *
 from PyQt6.QtCore import Qt
 
+
 class WindowConfig:
     # ======================
     # WINDOW GEOMETRY

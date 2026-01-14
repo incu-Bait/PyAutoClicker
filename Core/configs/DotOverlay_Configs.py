@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 
+
 class DotOverlay_Configs:
     # ============================================
     # COLOR DEFINITIONS \ ASSIGNMENTS

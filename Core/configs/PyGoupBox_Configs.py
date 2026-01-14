@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 
+
 class Configs:
     # ======================
     # BORDER ANIMATION DEFAULTS

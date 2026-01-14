@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 
+
 class FileManager:
     def __init__(self, keybind_manager: Any, settings_panel: Any) -> None:
         self.keybind_manager: Any = keybind_manager

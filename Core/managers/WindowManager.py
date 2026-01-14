@@ -1,6 +1,7 @@
 from Core.globals.Base_import import *
 from Core.configs.Windows_Configs import WindowConfig, QMW_UIConfig
 
+
 class WindowManager:
     def __init__(self, main_window):
         self.main_window = main_window

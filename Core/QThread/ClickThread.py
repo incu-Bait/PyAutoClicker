@@ -2,6 +2,7 @@ from Core.globals.Base_import import *
 from Core.configs.ClickerThread_Configs import ClickerThread_Configs
 from Core.api.MouseApi import FMClickerAPI
 
+
 class ClickerThread(QThread):
     status_update = pyqtSignal(str)
     click_count_update = pyqtSignal(int)

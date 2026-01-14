@@ -1,5 +1,6 @@
 from Core.globals.Base_import import List
 
+
 class ClickerThread_Configs:
     DEFAULT_INTERVAL: float = 0.1
     DEFAULT_RANDOM_RANGE: float = 0.05

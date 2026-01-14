@@ -1,5 +1,5 @@
 # ============================================
-# TODO : Need to rework an clean this file up its doing random shit and could move some functions to different files 
+# TODO : Need to rework an clean this file up its doing random shit and i could move some functions to different files.
 # QMW (QMainWindow) Event Handler
 # ============================================
 # NOTE: "QMW" stands for QMainWindow

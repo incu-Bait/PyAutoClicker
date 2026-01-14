@@ -4,7 +4,6 @@ from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
 from Core.CustomWidgets.QLineEdit.PyLineEdit import PyLineEdit
 
 
-
 class HotkeyPanel(QWidget):
     hotkey_changed = pyqtSignal(str)
     def __init__(self, default_hotkey: str = None):
