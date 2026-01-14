@@ -1,4 +1,5 @@
 # ============================================
+# TODO : Need to rework an clean this file up its doing random shit and could move some functions to different files 
 # QMW (QMainWindow) Event Handler
 # ============================================
 # NOTE: "QMW" stands for QMainWindow
@@ -57,18 +58,52 @@ class QMW_EventHandler:
     
     def change_hotkey(self, hotkey):
         try:
-            keyboard.remove_hotkey(self.main.hotkey)
-            keyboard.add_hotkey(hotkey.lower(), self.toggle_clicking)
+            if not self.validate_hotkey_format(hotkey):
+                error_message = f"Invalid hotkey format: {hotkey}"
+                self.main.statusBar().showMessage(error_message)
+                return
+            hotkey = hotkey.lower()
+            if hasattr(self.main, 'hotkey') and self.main.hotkey:
+                try:
+                    keyboard.remove_hotkey(self.main.hotkey)
+                except (KeyError, ValueError):
+                    pass 
+            keyboard.add_hotkey(hotkey, self.toggle_clicking)
             self.main.hotkey = hotkey
             self.main.ui_manager.update_hotkey_ui(hotkey)
-            self.main.keybind_manager.keybinds[QMW_UIConfig.KEYBIND_TOGGLE_CLICKING] = hotkey.upper()
-            self.main.keybind_manager.save_keybinds_to_file()
+            if QMW_UIConfig.KEYBIND_TOGGLE_CLICKING in self.main.keybind_manager.keybinds:
+                self.main.keybind_manager.keybinds[QMW_UIConfig.KEYBIND_TOGGLE_CLICKING] = hotkey.upper()
+                self.main.keybind_manager.save_keybinds_to_file(self.main.keybind_manager.keybinds)
+            if self.main.clicker.is_running:
+                text = QMW_UIConfig.TOGGLE_STOP_TEXT_FORMAT.format(hotkey=hotkey.upper())
+            else:
+                text = QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey.upper())
+            self.main.ui_manager.toggle_btn.setText(text)
             message = QMW_UIConfig.LOG_HOTKEY_CHANGED_FORMAT.format(hotkey=hotkey.upper())
             self.main.statusBar().showMessage(message)
+            
         except Exception as e:
             error_message = QMW_UIConfig.LOG_HOTKEY_FAILED_FORMAT.format(error=str(e))
             self.main.statusBar().showMessage(error_message)
     
+    def validate_hotkey_format(self, hotkey):
+        if not hotkey or not hotkey.strip():
+            return False
+        parts = hotkey.lower().split('+')
+        modifiers = {'ctrl', 'control', 'alt', 'shift', 'win', 'windows', 'cmd', 'super', 'meta'}
+        regular_keys = [part for part in parts if part not in modifiers]
+        if not regular_keys:
+            return False
+        for key in regular_keys:
+            if len(key) > 1 and not key.startswith('f') and not key.isdigit():
+                special_keys = {
+                    'enter', 'return', 'space', 'tab', 'backspace', 'delete', 
+                    'insert', 'home', 'end', 'pageup', 'pagedown',
+                    'up', 'down', 'left', 'right', 'escape', 'esc'
+                }
+                if key not in special_keys:
+                    return False
+        return True
     # ----------------- Clicker Control -----------------
     
     def toggle_clicking(self):
@@ -140,13 +175,11 @@ class QMW_EventHandler:
         hotkey = self.main.keybind_manager.get_keybind(  # \\ Update toggle button text with hotkey
             QMW_UIConfig.KEYBIND_TOGGLE_CLICKING
         ) or QMW_UIConfig.DEFAULT_CLICK_BIND
-        
         if self.main.clicker.is_running:
             text = QMW_UIConfig.TOGGLE_STOP_TEXT_FORMAT.format(hotkey=hotkey.upper())
         else:
             text = QMW_UIConfig.TOGGLE_START_TEXT_FORMAT.format(hotkey=hotkey.upper())
-        
-        self.main.ui_manager.toggle_btn.setText(text)
+        self.main.ui_manager.hotkey_toggle.setText(text)
         self.main.hotkey = hotkey
         self.main.statusBar().showMessage(QMW_UIConfig.LOG_KEYBIND_UPDATED)
 
@@ -206,7 +239,7 @@ class QMW_EventHandler:
         self.main.statusBar().showMessage(QMW_UIConfig.LAYOUT_RESET_MESSAGE)
 
     # ----------------- Dialog Windows -----------------
-    
+    # TODO: Move this to Ui_Manager? What am i doing with this event file ...
     def show_keyboard_shortcuts(self):
         ShortcutsDialog(self.main.keybind_manager, self.main).exec()
             

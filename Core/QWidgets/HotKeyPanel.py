@@ -1,6 +1,8 @@
 from Core.globals.Base_import import *
 from Core.configs.HockeyPanel_Config import *
 from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.CustomWidgets.QLineEdit.PyLineEdit import PyLineEdit
+
 
 
 class HotkeyPanel(QWidget):
@@ -36,8 +38,9 @@ class HotkeyPanel(QWidget):
 
         # --- Hotkey input ---
         form = QFormLayout()
-        self.hotkey_edit = QLineEdit(default_hotkey)
+        self.hotkey_edit = PyLineEdit(default_hotkey)
         self.hotkey_edit.setObjectName(HotkeyPanelConfig.HOTKEY_EDIT_OBJECT_NAME)
+        self.hotkey_edit.setPlaceholderText("Click here ...")
         form.addRow(HotkeyPanelConfig.FORM_LABEL_TEXT, self.hotkey_edit)
         group_layout.addLayout(form)
 
@@ -58,11 +61,15 @@ class HotkeyPanel(QWidget):
         self.setMinimumHeight(HotkeyPanelConfig.MIN_HEIGHT)
 
     def apply_hotkey(self):
-        hotkey = self.hotkey_edit.text().strip().lower()
-        if hotkey:
-            self.current_label.setText(
-                HotkeyPanelConfig.CURRENT_HOTKEY_LABEL_FORMAT.format(
-                    hotkey=hotkey.upper()
-                )
+        hotkey = self.hotkey_edit.text().strip()
+        if not hotkey:
+            return
+        hotkey = hotkey.lower()
+
+        self.current_label.setText(
+            HotkeyPanelConfig.CURRENT_HOTKEY_LABEL_FORMAT.format(
+                hotkey=hotkey.upper()
             )
-            self.hotkey_changed.emit(hotkey)
+        )
+        self.hotkey_changed.emit(hotkey)
+        self.hotkey_edit.setText("")
