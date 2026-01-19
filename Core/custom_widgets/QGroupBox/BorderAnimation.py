@@ -163,4 +163,4 @@ class Animation:
         return Configs.ANIMATION_STATE_STOPPED
 
     def is_animation_enabled(self):
-        return self._animation_enabled
+        return self._animation_enabled 

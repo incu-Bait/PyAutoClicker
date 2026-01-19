@@ -12,6 +12,40 @@ QMainWindow {
     background-color: {{bg_primary}};
     color: {{text_primary}};
 }
+
+QMainWindow::separator {
+    background-color: {{accent}};
+    width: 6px;
+    height: 6px;
+    margin: 0px;
+}
+
+QMainWindow::separator:hover {
+    background-color: {{highlight}};
+}
+
+QSplitter::handle {
+    background-color: {{accent}};
+    margin: 1px;
+}
+
+QSplitter::handle:horizontal {
+    width: 6px;
+    min-width: 6px;
+}
+
+QSplitter::handle:vertical {
+    height: 6px;
+    min-height: 6px;
+}
+
+QSplitter::handle:hover {
+    background-color: {{highlight}};
+}
+
+QSplitter::handle:pressed {
+    background-color: {{accent}};
+}
 /* =====================================================================
                         DEFAULT WIDGET TEXT + SELECTION
 ===================================================================== */
@@ -289,7 +323,6 @@ QStatusBar QLabel {
 /* =====================================================================
                     LINE EDITS & TEXT EDITS
 ===================================================================== */
-QTextEdit,
 QPlainTextEdit {
     background-color: {{bg_tertiary}};
     color: {{text_primary}};
@@ -313,6 +346,14 @@ QLineEdit {
     border: 2px solid {{border}};
     background-color: {{bg_tertiary}};
     border-radius: 8px;
+}
+
+QTextEdit {
+    background-color: {{bg_tertiary}};
+    color: {{text_primary}};
+    border: 2px solid {{border}};
+    padding: 6px 10px;
+    selection-background-color: {{accent}};;
 }
 /* =====================================================================
                                 PROGRESS BARS
@@ -680,4 +721,4 @@ QFrame#top_separator_frame {
     min-height: 2px;
     max-height: 2px;
     margin: 5px 0px;
-}
+} 

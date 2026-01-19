@@ -1,7 +1,7 @@
 from Core.globals.Base_import import *
 from Core.configs.SettingsPanel_Configs import SettingsPanel_Configs
 from Core.managers.FileManager import FileManager
-from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.custom_widgets.QGroupBox.PyGroupBox import PyGroupBox
 
 
 class ClickSettingsUI:

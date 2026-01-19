@@ -150,7 +150,7 @@ class QMW_UIConfig: # \\ QMW = QMainWindow
     STOP_ICON = QStyle.StandardPixmap.SP_MediaPause
     PLAY_ICON = QStyle.StandardPixmap.SP_MediaPlay
     STATUS_ICON_SIZE_RENDER = 16
-    
+    CURSOR_ICON = Qt.CursorShape.PointingHandCursor
     # ======================
     # KEYBIND KEYS
     # ======================

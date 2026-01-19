@@ -13,7 +13,8 @@ from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.QWidgets.SettingsPanel import SettingsPanel
 from Core.QWidgets.HotKeyPanel import HotkeyPanel
 from Core.QWidgets.ControlPanel import ControlPanel
-from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.custom_widgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.QWidgets.ScriptingPanel import ScriptPanel
 
 
 class UIManager:
@@ -31,9 +32,11 @@ class UIManager:
         self.hotkey_toggle: Optional[QAction] = None
         self.dot_toggle: Optional[QAction] = None
         self.toggle_btn: Optional[QPushButton] = None  
+        self.script_panel: Optional[ScriptPanel] = None
+        self.is_script_visible = False 
+        self.script_toggle: Optional[QAction] = None
     
     def create_widgets(self) -> None:
-        # Central widget with control panel
         central = QWidget()
         central.setObjectName(QMW_UIConfig.CENTRAL_WIDGET_OBJECT_NAME)
         self.main_window.setCentralWidget(central)
@@ -59,7 +62,7 @@ class UIManager:
     def create_menus(self) -> None:
         menubar = self.main_window.menuBar()
         menubar.setObjectName(QMW_UIConfig.MENUBAR_OBJECT_NAME)
-        
+        menubar.setCursor(QMW_UIConfig.CURSOR_ICON)
         self._create_file_menu(menubar)
         self._create_view_menu(menubar)
         self._create_theme_menu(menubar)
@@ -68,7 +71,7 @@ class UIManager:
     def _create_file_menu(self, menubar):
         file_menu = menubar.addMenu(QMW_UIConfig.MENU_FILE)
         file_menu.setObjectName(QMW_UIConfig.FILE_MENU_OBJECT_NAME)
-        
+        file_menu.setCursor(QMW_UIConfig.CURSOR_ICON)
         exit_action = QAction(QMW_UIConfig.ACTION_EXIT_TEXT, self.main_window)
         shortcut = self.main_window.keybind_manager.get_keybind(QMW_UIConfig.KEYBIND_EXIT_APP)
         if shortcut:
@@ -79,7 +82,7 @@ class UIManager:
     def _create_view_menu(self, menubar):
         view_menu = menubar.addMenu(QMW_UIConfig.MENU_VIEW)
         view_menu.setObjectName(QMW_UIConfig.VIEW_MENU_OBJECT_NAME)
-        
+        view_menu.setCursor(QMW_UIConfig.CURSOR_ICON)
         self.settings_toggle = self._create_checkable_action(
             QMW_UIConfig.ACTION_SETTINGS_PANEL_TEXT,
             self.main_window.event_handler.toggle_settings_panel,
@@ -90,9 +93,16 @@ class UIManager:
             self.main_window.event_handler.toggle_hotkey_panel,
             QMW_UIConfig.KEYBIND_TOGGLE_HOTKEY
         )
-        
+        self.script_toggle = self._create_checkable_action(
+            "Script Editor",
+            self.main_window.event_handler.toggle_script_panel,
+            None,  # \\ Add keybind config if needed
+            checked=False  # \\ Start unchecked
+        )
+
         view_menu.addAction(self.settings_toggle)
         view_menu.addAction(self.hotkey_toggle)
+        view_menu.addAction(self.script_toggle)
         view_menu.addSeparator()
         
         reset_action = QAction(QMW_UIConfig.ACTION_RESET_LAYOUT_TEXT, self.main_window)
@@ -105,7 +115,7 @@ class UIManager:
     def _create_theme_menu(self, menubar):
         theme_menu = menubar.addMenu(QMW_UIConfig.MENU_THEME)
         theme_menu.setObjectName(QMW_UIConfig.THEME_MENU_OBJECT_NAME)
-        
+        theme_menu.setCursor(QMW_UIConfig.CURSOR_ICON)
         for theme_name in self.theme_manager.get_available_themes():
             action = QAction(theme_name.title(), self.main_window)
             
@@ -122,7 +132,7 @@ class UIManager:
     def _create_help_menu(self, menubar):
         help_menu = menubar.addMenu(QMW_UIConfig.MENU_HELP)
         help_menu.setObjectName(QMW_UIConfig.HELP_MENU_OBJECT_NAME)
-        
+        help_menu.setCursor(QMW_UIConfig.CURSOR_ICON)
         shortcuts_action = QAction(QMW_UIConfig.ACTION_KEYBOARD_SHORTCUTS_TEXT, self.main_window)
         shortcut = self.main_window.keybind_manager.get_keybind(QMW_UIConfig.KEYBIND_SHOW_SHORTCUTS)
         if shortcut:
@@ -138,14 +148,15 @@ class UIManager:
         about_action.triggered.connect(self.main_window.event_handler.show_about)
         help_menu.addAction(about_action)
     
-    def _create_checkable_action(self, text, callback, keybind_name) -> QAction:
+    def _create_checkable_action(self, text, callback, keybind_name, checked=True) -> QAction:
         action = QAction(text, self.main_window)
         action.setCheckable(True)
-        action.setChecked(True)
+        action.setChecked(checked)
         
-        shortcut = self.main_window.keybind_manager.get_keybind(keybind_name)
-        if shortcut:
-            action.setShortcut(shortcut)
+        if keybind_name:
+            shortcut = self.main_window.keybind_manager.get_keybind(keybind_name)
+            if shortcut:
+                action.setShortcut(shortcut)
         
         action.triggered.connect(callback)
         return action
@@ -153,11 +164,15 @@ class UIManager:
     def create_docks(self) -> None:
         self._create_settings_dock()
         self._create_hotkey_dock()
+        self._create_script_dock()  
+        
         self.main_window.resizeDocks(
-            [self.main_window.settings_dock, self.main_window.hotkey_dock],
-            QMW_UIConfig.INITIAL_DOCK_WIDTHS,
+            [self.main_window.settings_dock, 
+            self.main_window.hotkey_dock],
+            [300, 300], 
             QMW_UIConfig.DOCK_HORIZONTAL
         )
+        
         central = self.main_window.centralWidget()
         if central:
             central.setMinimumSize(
@@ -165,6 +180,26 @@ class UIManager:
                 QMW_UIConfig.CENTRAL_WIDGET_MIN_HEIGHT
             )
     
+    def _create_script_dock(self):
+        self.main_window.script_dock = QDockWidget(
+            "Script Editor", 
+            self.main_window
+        )
+        self.main_window.script_dock.setObjectName("script_dock")
+        self.script_panel = ScriptPanel(self.main_window.script_engine)
+        self.main_window.script_dock.setWidget(self.script_panel)
+        self.main_window.script_dock.setFeatures(QMW_UIConfig.DOCK_FEATURES)
+        self.main_window.script_dock.setAllowedAreas(QMW_UIConfig.DOCK_ALLOWED_LEFT_RIGHT)
+        self.script_panel.setSizePolicy(
+            QMW_UIConfig.SIZE_POLICY_PREFERRED, 
+            QMW_UIConfig.SIZE_POLICY_PREFERRED
+        )
+        self.script_panel.setMinimumWidth(450)
+        self.script_panel.setMinimumHeight(600)
+        self.main_window.script_dock.resize(350, 400)
+        self.main_window.script_dock.hide()
+        self.main_window.script_dock.visibilityChanged.connect(lambda visible: self.script_toggle.setChecked(visible) if self.script_toggle else None)
+        
     def _create_settings_dock(self):
         self.main_window.settings_dock = QDockWidget(
             QMW_UIConfig.DOCK_SETTINGS_TITLE, 

@@ -6,7 +6,7 @@ class WindowManager:
     def __init__(self, main_window):
         self.main_window = main_window
         self.app_dir = os.path.dirname(os.path.abspath(sys.argv[0])) # \\ This should fix the issue with not being able to find Asset directory 
-                                                                     # just gets the app directory where "Main.py" is. Might run in to some issues with this tho if "Main.py"
+                                                                     # just gets the app directory where "Main.py" is. Might run in to some issues with this tho if "Main.py" is moved
         self.main_window.setWindowFlags(self.main_window.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint) # \\ Removed Maximize Button                                                       
         self.main_window.setFixedSize(WindowConfig.GEOMETRY[2], WindowConfig.GEOMETRY[3])
 

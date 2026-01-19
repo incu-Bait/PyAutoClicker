@@ -1,0 +1,60 @@
+<section id="examples">
+    <link rel="stylesheet" href="../css/Style.css">
+    <h2>Script Examples</h2>
+    
+    <h3>Example #1</h3>
+    <pre><code> 
+# ================================
+# log "HelloWord!" 3 times
+# ================================
+
+pyscript.log("Starting simple script...")
+
+for i in range(3):
+    pyscript.log(f"HelloWord!#{i+1}")
+    pyscript.wait(0.5) 
+
+pyscript.log("Done!")
+    </code></pre>
+    
+    <h3>Example #2</h3>
+    <pre><code>
+# ================================
+# Drag from point A to point B 
+#  using screen X & Y cords
+# =================================
+
+start_x, start_y = 815, 351
+end_x, end_y = 582, 351
+
+pyscript.log(f"Starting drag from ({start_x}, {start_y}) to ({end_x}, {end_y})")
+
+pyscript.move(start_x, start_y)
+pyscript.mouse_down('left')
+pyscript.wait(0.2)
+pyscript.move(end_x, end_y, duration=0.5)
+pyscript.mouse_up('left')
+
+if pyscript.is_dragging():
+    pyscript.log("Drag still active")
+else:
+    pyscript.log("Drag completed")
+
+drag_info = pyscript.get_drag_info()
+if drag_info:
+    pyscript.log(f"Drag info: Start={drag_info['start']}, Delta={drag_info['delta']}")
+    </code></pre>
+        
+    <h3>Example #3</h3>
+    <pre><code>
+# =================================
+#  Click 10 times then log "Done"
+# =================================
+
+for i in range(10):
+    pyscript.click()
+    pyscript.log(f"Click {i + 1}/10")
+    pyscript.wait(0.5)
+
+pyscript.log("Done!")
+</code></pre>

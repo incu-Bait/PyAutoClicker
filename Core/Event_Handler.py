@@ -8,7 +8,7 @@ from Core.configs.Theme_Configs import DEFAULT_THEME
 from Core.QDialog.ShortcutsDialog import ShortcutsDialog
 from Core.QDialog.AboutDialog import AboutDialog
 from Core.configs.Windows_Configs import QMW_UIConfig
-from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.custom_widgets.QGroupBox.PyGroupBox import PyGroupBox
 
 
 class QMW_EventHandler: 
@@ -41,13 +41,19 @@ class QMW_EventHandler:
     def apply_settings(self):
         settings = self.main.ui_manager.settings_panel.get_settings()
         clicker = self.main.clicker
-        
         clicker.interval = settings["interval"]
         clicker.remaining_clicks = settings["remaining_clicks"]
         clicker.button = settings["button"]
         clicker.double_click = settings["double_click"]
         clicker.fixed_pos = settings["fixed_pos"]
     
+    def toggle_script_panel(self, visible):
+        if visible:
+            self.main.script_dock.setFloating(True)
+            self.main.script_dock.show()
+        else:
+            self.main.script_dock.hide()
+            
     def change_hotkey(self, hotkey):
         try:
             if not self._validate_hotkey_format(hotkey):

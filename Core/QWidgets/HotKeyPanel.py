@@ -1,7 +1,7 @@
 from Core.globals.Base_import import *
 from Core.configs.HockeyPanel_Config import *
-from Core.CustomWidgets.QGroupBox.PyGroupBox import PyGroupBox
-from Core.CustomWidgets.QLineEdit.PyLineEdit import PyLineEdit
+from Core.custom_widgets.QGroupBox.PyGroupBox import PyGroupBox
+from Core.custom_widgets.QLineEdit.PyLineEdit import PyLineEdit
 
 
 class HotkeyPanel(QWidget):

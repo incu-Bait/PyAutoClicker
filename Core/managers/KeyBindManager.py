@@ -4,7 +4,6 @@
 # Manages keyboard shortcuts configuration
 # Handles loading, saving, and merging keybinds
 # ============================================
-
 from Core.globals.Base_import import *
 from Core.configs.KeyBindManager_Configs import KeybindConfigs
 

@@ -7,6 +7,7 @@ from Core.managers.Ui_Manager import UIManager
 from Core.managers.WindowManager import WindowManager
 from Core.Event_Handler import QMW_EventHandler
 from Core.managers.FileManager import FileManager
+from Core.script_engine.PyScriptEngine import PyScriptEngine
 
 
 class PyClicker(QMainWindow):
@@ -19,6 +20,7 @@ class PyClicker(QMainWindow):
         self.ui_manager = UIManager(self, self.theme_manager)
         self.file_manager = FileManager(self.keybind_manager, self.event_handler)
         self.clicker = ClickerThread()
+        self.script_engine = PyScriptEngine(self.clicker)
         self.hotkey = self.keybind_manager.get_keybind("toggle_clicking") or QMW_UIConfig.DEFAULT_CLICK_BIND
         self.window_manager.setup_window()
         self.ui_manager.create_widgets()

@@ -1,5 +1,5 @@
 from Core.globals.Base_import import *
-from Core.CustomWidgets.QGroupBox.BorderAnimation import Animation
+from Core.custom_widgets.QGroupBox.BorderAnimation import Animation
 from Core.configs.PyGoupBox_Configs import Configs
 from Core.managers.ThemeManager import ThemeManager
 

@@ -1,0 +1,18 @@
+<section style="text-align: center;" id="api">
+    <link rel="stylesheet" href="../css/Style.css">
+    <h2>PyScript API Reference</h2>
+    <table>
+        <tr><th>Method</th><th>Category</th><th>Description</th><th>Example</th></tr>
+        <tr><td><code>pyscript.click(x=None,y=None,button='left',double=False)</code></td>
+            <td>Mouse</td><td>Clicks the mouse optionally at a position</td><td><code>pyscript.click(500,300)</code></td></tr>
+        <tr><td><code>pyscript.move(x,y,duration=0)</code></td><td>Mouse</td><td>Moves cursor smoothly</td><td><code>pyscript.move(100,200,0.5)</code></td></tr>
+        <tr><td><code>pyscript.drag_to(x,y,duration=0,button='left')</code></td><td>Mouse</td><td>Drags while holding button</td><td><code>pyscript.drag_to(800,400)</code></td></tr>
+        <tr><td><code>pyscript.wait(seconds)</code></td><td>Timing</td><td>Pauses the script</td><td><code>pyscript.wait(1)</code></td></tr>
+        <tr><td><code>pyscript.log(message,level="INFO")</code></td><td>Debug</td><td>Logs output to UI</td><td><code>pyscript.log("Done")</code></td></tr>
+        <tr><td><code>pyscript.stop()</code></td><td>Control</td><td>Stops script safely</td><td><code>pyscript.stop()</code></td></tr>
+        <tr><td><code>pyscript.is_running()</code></td><td>State</td><td>Checks if script is active</td><td><code>if pyscript.is_running(): ...</code></td></tr>
+        <tr><td><code>pyscript.get_mouse_position()</code></td><td>State</td><td>Returns cursor position</td><td><code>x,y=pyscript.get_mouse_position()</code></td></tr>
+        <tr><td><code>pyscript.on(event,callback)</code></td><td>Events</td><td>Registers event listener</td><td><code>pyscript.on("click",my_func)</code></td></tr>
+        <tr><td><code>pyscript.emit(event,data=None)</code></td><td>Events</td><td>Triggers custom event</td><td><code>pyscript.emit("done")</code></td></tr>
+    </table>
+</section>
