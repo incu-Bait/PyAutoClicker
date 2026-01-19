@@ -1,7 +1,6 @@
-from Core.globals.Base_import import pyqtSignal, QThread, random, time, traceback, List
+from Core.globals.Base_import import *
 from Core.script_engine.PyScriptAPI import PyScript
 from Core.script_engine.configs.PyScript_Configs import PyScriptConfig
-from typing import Dict, Any, Optional
 
 
 class PyScriptEngine(QThread):
