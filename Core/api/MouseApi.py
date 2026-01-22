@@ -1,4 +1,3 @@
-# MouseApi.py
 from Core.globals.Base_import import *
 
 

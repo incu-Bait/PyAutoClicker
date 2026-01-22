@@ -29,7 +29,8 @@ from typing import (
     Optional, 
     Tuple, 
     Union,
-    Callable
+    Callable,
+    TypedDict,
 )
 
 # ==============================================================================

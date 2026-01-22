@@ -1,4 +1,4 @@
-from typing import TypedDict, Tuple, Dict, List, Optional
+from Core.globals.Base_import import Tuple, Dict, List, Optional, TypedDict
 
 
 class MouseState(TypedDict):

@@ -1,3 +1,5 @@
+from Core.globals.Base_import import *
+
 class ScriptPanelConfig:
     # ==============================================================================
     # UI DIMENSIONS & GEOMETRY
@@ -154,3 +156,9 @@ pyscript.log("Done!")"""
     MAX_SCRIPT_LENGTH = 100000  
     WARN_ON_LONG_SCRIPT = True
     LONG_SCRIPT_THRESHOLD = 10000 
+
+
+    # ==============================================================================
+    # Qt Cursors
+    # ==============================================================================
+    HAND_CURSOR = Qt.CursorShape.PointingHandCursor

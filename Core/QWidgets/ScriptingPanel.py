@@ -29,6 +29,7 @@ class ScriptPanel(QWidget):
         self.help_btn = QPushButton("Documents")
         self.help_btn.setFixedSize(100, 30)  
         self.help_btn.setObjectName("help_button")
+        self.help_btn.setCursor(self.cfg.HAND_CURSOR)
         self.help_btn.setToolTip("Open Scripting Manual")
         header.addWidget(self.help_btn)
         
@@ -39,6 +40,8 @@ class ScriptPanel(QWidget):
         self.stop_btn.setEnabled(False)
         self.run_btn.setObjectName(self.cfg.RUN_BUTTON_OBJECT_NAME)
         self.stop_btn.setObjectName(self.cfg.STOP_BUTTON_OBJECT_NAME)
+        self.run_btn.setCursor(self.cfg.HAND_CURSOR)
+        self.stop_btn.setCursor(self.cfg.HAND_CURSOR)
         
         header.addStretch()
         header.addWidget(self.run_btn)

@@ -1,6 +1,36 @@
 from Core.globals.Base_import import *
 from Core.script_engine.configs.PyScript_Configs import PyScriptConfig
 from Core.api.MouseApi import FMClickerAPI
+# ============================================================
+#  Function               |       What it does
+# ============================================================
+# _validate_coordinates ---> Validates if coordinates are within screen bounds
+# _validate_button ---> Validates and maps button names to standard format
+# _validate_duration ---> Validates that duration values are non negative
+# click ---> Performs mouse click at specified position or current position
+# move ---> Moves mouse cursor to specified coordinates with optional duration
+# wait ---> Pauses script execution for specified number of seconds
+# get_position ---> Returns current mouse cursor position
+# log ---> Logs messages with specified level to the engine
+# stop ---> Stops script execution and raises StopIteration if enabled
+# is_running ---> Returns whether the script is currently running
+# on ---> Registers event listener callback for specified event
+# emit ---> Triggers all callbacks registered for specified event
+# _check_stop ---> Checks if script should stop and raises StopIteration if needed
+# get_mouse_state ---> Returns current mouse state including position and button states
+# is_button_pressed ---> Checks if specified mouse button is currently pressed
+# get_button_state ---> Returns state of all mouse buttons
+# get_mouse_position ---> Returns current mouse cursor position
+# get_last_click_info ---> Returns timestamp and button of last click performed
+# drag_to ---> Drags mouse from current position to target coordinates
+# mouse_down ---> Presses specified mouse button down at optional coordinates
+# mouse_up ---> Releases specified mouse button at optional coordinates
+# is_dragging ---> Returns whether a drag operation is currently active
+# get_drag_info ---> Returns information about current drag operation
+# mouse_scroll ---> Scrolls mouse wheel by specified clicks at optional position
+# wait_for_button_press ---> Waits for specified button to be pressed with timeout
+# wait_for_button_release ---> Waits for specified button to be released with timeout
+# ============================================================
 
 
 class PyScript:
