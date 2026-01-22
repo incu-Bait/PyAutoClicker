@@ -1,7 +1,6 @@
 > **Note:** This project is a work in progress.  
-> Features may be incomplete or subject to change.
->I am by no means a expert.
->Making Projects like this Helps Me improve and learn :) 
+>Features may be incomplete or subject to change.
+>I am by no means a expert, Making projects like this helps me improve and learn :) 
 
 <div align="center">
 
