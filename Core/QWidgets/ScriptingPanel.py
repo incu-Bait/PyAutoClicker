@@ -22,12 +22,12 @@ class ScriptPanel(QWidget):
         layout.setSpacing(self.cfg.LAYOUT_SPACING)
         self.setObjectName(self.cfg.SCRIPT_PANEL_OBJECT_NAME)
         
-        # --- Header with run/stop buttons ---
+        # --- Header Buttons ---
         header = QHBoxLayout()
         
         # --- Help button on the left ---
         self.help_btn = QPushButton("Documents")
-        self.help_btn.setFixedSize(100, 30)  # Square button
+        self.help_btn.setFixedSize(100, 30)  
         self.help_btn.setObjectName("help_button")
         self.help_btn.setToolTip("Open Scripting Manual")
         header.addWidget(self.help_btn)
@@ -209,5 +209,5 @@ class ScriptPanel(QWidget):
             abs_path = os.path.abspath(path)
             if os.path.exists(abs_path):
                 return abs_path
-        
+
         return None

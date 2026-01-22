@@ -1,5 +1,6 @@
 from Core.globals.Base_import import *
 from Core.script_engine.configs.PyScript_Configs import PyScriptConfig
+from Core.api.MouseApi import FMClickerAPI
 
 
 class PyScript:
@@ -7,6 +8,7 @@ class PyScript:
         self.cfg = PyScriptConfig
         self.clicker = clicker_thread
         self.engine = script_engine
+        self.mouse_api = FMClickerAPI()
         self._should_stop = False
         self._event_listeners = {}
         self._mouse_state = {
@@ -59,11 +61,15 @@ class PyScript:
                 self.log(f"Warning: Coordinates ({x}, {y}) may be outside screen bounds", "WARNING")
         
         if x is not None and y is not None:
-            pyautogui.click(x, y, button=button, clicks=2 if double else 1)
+            self.mouse_api.click_at(x, y, button, double)
         else:
-            pyautogui.click(button=button, clicks=2 if double else 1)
+            if double:
+                self.mouse_api.double_click(button)
+            else:
+                self.mouse_api.click(button)
         
         self._mouse_state['last_click'] = (time.time(), button)
+        self._mouse_state['position'] = self.get_position()
 
         if self.cfg.DEBUG_ENABLED and self.cfg.DEBUG_LOG_API_CALLS:
             pos_str = f"at ({x}, {y})" if x is not None and y is not None else "at current position"
@@ -79,10 +85,8 @@ class PyScript:
         
         if duration is None:
             duration = self.cfg.MOUSE_MOVE_DURATION_DEFAULT
-        else:
-            duration = self._validate_duration(duration)
-        
-        pyautogui.moveTo(x, y, duration=duration)
+
+        self.mouse_api.move_to(x, y, duration)
         self._mouse_state['position'] = (x, y)
 
         if self.cfg.DEBUG_ENABLED and self.cfg.DEBUG_LOG_API_CALLS:
@@ -103,7 +107,7 @@ class PyScript:
             self.log(f"API: wait for {seconds}s", "DEBUG")
     
     def get_position(self) -> Tuple[int, int]:
-        return pyautogui.position()
+        return self.mouse_api.get_position()
     
     def log(self, message: str, level: str = None) -> None:
         if level is None:
@@ -167,17 +171,12 @@ class PyScript:
             self._cached_state and 
             current_time - self._last_state_update < self.cfg.CACHE_DURATION):
             return self._cached_state.copy()
-        
-        current_x, current_y = pyautogui.position()
+        current_x, current_y = self.mouse_api.get_position()
         self._mouse_state['position'] = (current_x, current_y)
-
-        left_pressed = ctypes.windll.user32.GetAsyncKeyState(self.cfg.VK_LBUTTON) & 0x8000 != 0
-        right_pressed = ctypes.windll.user32.GetAsyncKeyState(self.cfg.VK_RBUTTON) & 0x8000 != 0
-        middle_pressed = ctypes.windll.user32.GetAsyncKeyState(self.cfg.VK_MBUTTON) & 0x8000 != 0
-        
-        self._mouse_state['pressed']['left'] = left_pressed
-        self._mouse_state['pressed']['right'] = right_pressed
-        self._mouse_state['pressed']['middle'] = middle_pressed
+        button_state = self.mouse_api.get_button_state()
+        self._mouse_state['pressed']['left'] = button_state.get('left', False)
+        self._mouse_state['pressed']['right'] = button_state.get('right', False)
+        self._mouse_state['pressed']['middle'] = button_state.get('middle', False)
 
         self._last_state_update = current_time
         self._cached_state = self._mouse_state.copy()
@@ -188,17 +187,13 @@ class PyScript:
         return self._cached_state.copy()
     
     def is_button_pressed(self, button: str = 'left') -> bool:
-        state = self.get_mouse_state()
-        button = self._validate_button(button)
-        return state['pressed'].get(button, False)
+        return self.mouse_api.is_button_pressed(button)
     
     def get_button_state(self) -> dict:
-        state = self.get_mouse_state()
-        return state['pressed'].copy()
+        return self.mouse_api.get_button_state()
     
     def get_mouse_position(self) -> Tuple[int, int]:
-        state = self.get_mouse_state()
-        return state['position']
+        return self.mouse_api.get_position()
     
     def get_last_click_info(self) -> Optional[Tuple[float, str]]:
         return self._mouse_state.get('last_click')
@@ -212,15 +207,13 @@ class PyScript:
         
         if duration is None:
             duration = self.cfg.DRAG_DURATION_DEFAULT
-        else:
-            duration = self._validate_duration(duration)
         
-        current_x, current_y = pyautogui.position()
+        current_x, current_y = self.mouse_api.get_position()
         self._mouse_state['drag_start'] = (current_x, current_y)
         self._mouse_state['drag_active'] = True
 
         self.emit('mouse_drag_start', {'start': (current_x, current_y), 'button': button})
-        pyautogui.dragTo(x, y, duration=duration, button=button)
+        self.mouse_api.drag(current_x, current_y, x, y, button, duration)
         
         self._mouse_state['drag_active'] = False
         self._mouse_state['position'] = (x, y)
@@ -242,10 +235,10 @@ class PyScript:
                 self.log(f"Warning: Coordinates ({x}, {y}) may be outside screen bounds", "WARNING")
         
         if x is not None and y is not None:
-            pyautogui.moveTo(x, y)
+            self.mouse_api.move_to(x, y)
             self._mouse_state['position'] = (x, y)
-        
-        pyautogui.mouseDown(button=button)
+
+        self.mouse_api.mouse_down(button)
         self._mouse_state['pressed'][button] = True
 
         if self.cfg.DEBUG_ENABLED and self.cfg.DEBUG_LOG_API_CALLS:
@@ -261,10 +254,10 @@ class PyScript:
                 self.log(f"Warning: Coordinates ({x}, {y}) may be outside screen bounds", "WARNING")
         
         if x is not None and y is not None:
-            pyautogui.moveTo(x, y)
+            self.mouse_api.move_to(x, y)
             self._mouse_state['position'] = (x, y)
-        
-        pyautogui.mouseUp(button=button)
+
+        self.mouse_api.mouse_up(button)
         self._mouse_state['pressed'][button] = False
 
         if self.cfg.DEBUG_ENABLED and self.cfg.DEBUG_LOG_API_CALLS:
@@ -295,10 +288,9 @@ class PyScript:
                 self.log(f"Warning: Coordinates ({x}, {y}) may be outside screen bounds", "WARNING")
         
         if x is not None and y is not None:
-            pyautogui.moveTo(x, y)
+            self.mouse_api.move_to(x, y)
             self._mouse_state['position'] = (x, y)
-        
-        pyautogui.scroll(clicks)
+        self.mouse_api.scroll(clicks)
 
         if self.cfg.DEBUG_ENABLED and self.cfg.DEBUG_LOG_API_CALLS:
             pos_str = f"at ({x}, {y})" if x is not None and y is not None else "at current position"
@@ -315,7 +307,7 @@ class PyScript:
         
         start_time = time.time()
         while time.time() - start_time < timeout:
-            if self.is_button_pressed(button):
+            if self.mouse_api.is_button_pressed(button):
                 return True
             time.sleep(self.cfg.EXECUTION_CHECK_INTERVAL)
             self._check_stop()
@@ -332,7 +324,7 @@ class PyScript:
         
         start_time = time.time()
         while time.time() - start_time < timeout:
-            if not self.is_button_pressed(button):
+            if not self.mouse_api.is_button_pressed(button):
                 return True
             time.sleep(self.cfg.EXECUTION_CHECK_INTERVAL)
             self._check_stop()
