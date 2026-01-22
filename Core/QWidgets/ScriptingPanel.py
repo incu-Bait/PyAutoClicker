@@ -2,16 +2,19 @@ from Core.globals.Base_import import *
 from Core.configs.ScriptPanel_Configs import ScriptPanelConfig
 from Core.custom_widgets.QPlainTextEdit.PyScriptEditor import ScriptEditor
 from Core.custom_widgets.QSyntaxHighlighter.PyScriptHighlighter import PyScriptHighlighter
+from Core.managers.FileManager import FileManager
 
 
 class ScriptPanel(QWidget):
     script_started = pyqtSignal()
     script_stopped = pyqtSignal()
     
-    def __init__(self, script_engine):
+    def __init__(self, script_engine, file_manager: FileManager = None):
         super().__init__()
         self.script_engine = script_engine
         self.cfg = ScriptPanelConfig()
+        self.file_manager = file_manager or FileManager()
+        self.current_script_file = None
         self._setup_ui()
         self._connect_signals()
         self._load_example_script()
@@ -22,15 +25,13 @@ class ScriptPanel(QWidget):
         layout.setSpacing(self.cfg.LAYOUT_SPACING)
         self.setObjectName(self.cfg.SCRIPT_PANEL_OBJECT_NAME)
         
-        # --- Header Buttons ---
         header = QHBoxLayout()
         
-        # --- Help button on the left ---
-        self.help_btn = QPushButton("Documents")
-        self.help_btn.setFixedSize(100, 30)  
+        self.help_btn = QPushButton("Open Manual")
+        self.help_btn.setFixedSize(150, 30)  
         self.help_btn.setObjectName("help_button")
-        self.help_btn.setCursor(self.cfg.HAND_CURSOR)
         self.help_btn.setToolTip("Open Scripting Manual")
+        self.help_btn.setCursor(self.cfg.HAND_CURSOR)
         header.addWidget(self.help_btn)
         
         self.run_btn = QPushButton(self.cfg.RUN_BUTTON_TEXT)
@@ -48,7 +49,6 @@ class ScriptPanel(QWidget):
         header.addWidget(self.stop_btn)
         layout.addLayout(header)
         
-        # --- Script editor with line numbers ---
         editor_label = QLabel(self.cfg.EDITOR_LABEL_TEXT)
         editor_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(editor_label)
@@ -64,7 +64,6 @@ class ScriptPanel(QWidget):
         
         layout.addWidget(self.script_editor, stretch=3)
         
-        # --- Quick action buttons ---
         btn_layout = QHBoxLayout()
         btn_layout.setSpacing(self.cfg.BUTTON_SPACING)
         self.clear_btn = QPushButton(self.cfg.CLEAR_BUTTON_TEXT)
@@ -84,7 +83,6 @@ class ScriptPanel(QWidget):
         
         layout.addLayout(btn_layout)
         
-        # --- Output console ---
         output_label = QLabel(self.cfg.OUTPUT_LABEL_TEXT)
         output_label.setAlignment(Qt.AlignmentFlag.AlignCenter)  
         layout.addWidget(output_label)
@@ -159,58 +157,50 @@ class ScriptPanel(QWidget):
     
     def _load_example_script(self):
         self.script_editor.setPlainText(self.cfg.EXAMPLE_SCRIPT)
+        self.current_script_file = None
+        self._stop_watching_file()
     
     def _save_script(self):
-        filename, _ = QFileDialog.getSaveFileName(
-            self, 
-            self.cfg.SAVE_DIALOG_TITLE, 
-            "", 
-            self.cfg.FILE_FILTER
-        )
-        if filename:
-            try:
-                with open(filename, 'w') as f:
-                    f.write(self.script_editor.toPlainText())
-                self._append_output(self.cfg.SAVE_SUCCESS_FORMAT.format(filename=filename))
-            except Exception as e:
-                self._append_error(self.cfg.SAVE_ERROR_FORMAT.format(error=e))
+        result = self.file_manager.save_script(self.script_editor.toPlainText())
+        if result:
+            self.current_script_file = result
+            self._append_output(self.cfg.SAVE_SUCCESS_FORMAT.format(filename=result))
+            self._start_watching_file(result)
     
     def _load_script(self):
-        filename, _ = QFileDialog.getOpenFileName(
-            self,
-            self.cfg.LOAD_DIALOG_TITLE,
-            "",
-            self.cfg.FILE_FILTER
-        )
-        if filename:
-            try:
-                with open(filename, 'r') as f:
-                    self.script_editor.setPlainText(f.read())
-                self._append_output(self.cfg.LOAD_SUCCESS_FORMAT.format(filename=filename))
-            except Exception as e:
-                self._append_error(self.cfg.LOAD_ERROR_FORMAT.format(error=e))
+        result = self.file_manager.load_script()
+        if result:
+            filename, content = result
+            self.script_editor.setPlainText(content)
+            self.current_script_file = filename
+            self._append_output(self.cfg.LOAD_SUCCESS_FORMAT.format(filename=filename))
+            self._start_watching_file(filename)
     
     def _open_manual(self):
-        try:
-            manual_path = self._find_manual_file()
-            
-            if manual_path:
-                QDesktopServices.openUrl(QUrl.fromLocalFile(manual_path))
-            else:
-                self._append_error(f"Manual file not found")
-                
-        except Exception as e:
-            self._append_error(f"Error opening manual: {e}")
+        if self.file_manager.open_manual():
+            self._append_output("Manual opened successfully")
+        else:
+            self._append_error("Manual file not found")
     
-    def _find_manual_file(self):
-        possible_paths = [
-            r"Manual\PyScripting_Manual.html",
-            os.path.join("Manual", "PyScripting_Manual.html"),
-        ]
-        
-        for path in possible_paths:
-            abs_path = os.path.abspath(path)
-            if os.path.exists(abs_path):
-                return abs_path
-
-        return None
+    def _start_watching_file(self, filepath: str):
+        self.file_manager.watch_script_file(filepath, self._on_script_file_changed)
+    
+    def _stop_watching_file(self):
+        if self.current_script_file:
+            self.file_manager.unwatch_script_file(self.current_script_file)
+    
+    def _on_script_file_changed(self, filepath: str):
+        if filepath == self.current_script_file:
+            result = self.file_manager.load_script(filepath)
+            if result:
+                _, content = result
+                self.script_editor.setPlainText(content)
+                self._append_output(f"Reloaded script from {filepath}")
+    
+    def set_file_manager(self, file_manager: FileManager):
+        self.file_manager = file_manager
+    
+    def cleanup(self):
+        self._stop_watching_file()
+        if hasattr(self.file_manager, 'cleanup'):
+            self.file_manager.cleanup()

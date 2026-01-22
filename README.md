@@ -1,16 +1,24 @@
 > **Note:** This project is a work in progress.  
 > Features may be incomplete or subject to change.
+>I am by no means a expert.
+>Making Projects like this Helps Me improve and learn :) 
 
 <div align="center">
-<h2 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=50&duration=4000&pause=8000&color=0000FF&center=true&vCenter=true&width=500&lines=PyAutoClicker" alt="Typing SVG" />
-</h2>
 
-### *Simple Auto Clicker App Made With Python | PyQt6 GUI Library*
+[![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://python.org)
+[![PyQt6](https://img.shields.io/badge/PyQt6_GUI-3572A5?style=for-the-badge&logo=qt&logoColor=FFE873)](https://www.pythonguis.com/pyqt6/)
+[![Windows](https://img.shields.io/badge/Windows_Only-0078D6?style=for-the-badge&logo=windows&logoColor=white)]()
+[![License](https://img.shields.io/badge/LICENSE-MIT-8A2BE2?style=for-the-badge)](LICENSE)
 
----
+</div>
 
-<img width="903" height="541" alt="ReadMe_ScreenShot" src="https://github.com/user-attachments/assets/e52cb6fe-dda2-4de0-bc89-18da6ef54f6b" />
+<div align="center">
+
+# PyAutoClicker
+
+#### *Simple Auto Clicker App Made With Python | PyQt6 GUI Library*
+
+<img width="895" height="517" alt="AppScreenshot02" src="https://github.com/user-attachments/assets/51f56bb1-acca-44e2-b9b8-4f080aaaa84b" />
 
 ## **What To Expect**
 
@@ -18,7 +26,7 @@
 
 | Feature | Description |
 |---------|-------------|
-|  **Really Fast Clicking** | Like REALLY FAST **BEWARE !!**|
+|  **Uncapped Clicking** | REALLY FAST CLICKING API **BEWARE !!**|
 |  **Multiple Themes** | Dark, Light & Neon themes |
 |  **Custom Hotkeys** | Fully rebindable keyboard shortcuts | 
 |  **Position Overlay** | Visual dot overlay for precision | 
@@ -40,8 +48,9 @@ git clone https://github.com/incu-Bait/PyAutoClicker.git
 ---
 
 <h2 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=8000&color=FFFF00&center=true&vCenter=true&width=500&lines=Prerequisites" alt="Typing SVG" />
-</h2>
+
+# Prerequisites 
+
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" />
   <div style="text-align: left;">
@@ -49,14 +58,14 @@ git clone https://github.com/incu-Bait/PyAutoClicker.git
   </div>
 </div>
 
-## Required Packages / pip installs
+## Required Packages & pip installs
 
 ```python
-# ==== Imports you will need ====
 import PyQt6
 import pyautogui
 import keyboard
 ```
+#### All imports are in this file → [Core/globals/Base_import.py](Core/globals/Base_import.py)
 
 ```bash
 pip install PyQt6  
@@ -69,9 +78,3 @@ pip install pyautogui
 ```bash
 pip install keyboard
 ```
-
----
-[![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://python.org)
-[![PyQt6](https://img.shields.io/badge/PyQt6_GUI-3572A5?style=for-the-badge&logo=qt&logoColor=FFE873)](https://www.pythonguis.com/pyqt6/)
-[![Windows](https://img.shields.io/badge/Windows_Only-0078D6?style=for-the-badge&logo=windows&logoColor=white)]()
-[![License](https://img.shields.io/badge/LICENSE-MIT-8A2BE2?style=for-the-badge)](LICENSE)
