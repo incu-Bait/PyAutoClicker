@@ -1,7 +1,7 @@
 from Core.patch.DPI_Patch import PatchedQt
 PatchedQt.patch_qt_dpi()
 
-from Core.globals.Base_import import QApplication , sys, pyautogui, QCoreApplication
+from Core.globals.Base_import import QApplication , sys, pyautogui
 from Core.MainWindow import PyClicker
 from Core.configs.AppVersion import APP_NAME, APP_VERSION
 
