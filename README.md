@@ -44,7 +44,6 @@
 git clone https://github.com/incu-Bait/PyAutoClicker.git
 ```
 #### Than Run this file → [Main.py](Main.py)
----
 
 <h2 align="center">
 

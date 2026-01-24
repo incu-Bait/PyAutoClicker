@@ -146,7 +146,8 @@ from PyQt6.QtCore import (
     QTextStream,
     QIODevice,
     QDataStream,
-    QRegularExpression
+    QRegularExpression,
+    QCoreApplication
 )
 
 # ==============================================================================

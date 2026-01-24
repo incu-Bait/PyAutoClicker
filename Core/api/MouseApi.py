@@ -5,14 +5,14 @@ class FMClickerAPI:
     BUTTON_CODES = {
         "left": (2, 4),      # \\ MOUSEEVENTF_LEFTDOWN \ MOUSEEVENTF_LEFTUP
         "right": (8, 16),    # \\ MOUSEEVENTF_RIGHTDOWN \ MOUSEEVENTF_RIGHTUP
-        "middle": (32, 64),  # \\ MOUSEEVENTF_MIDDLEDOWN \MOUSEEVENTF_MIDDLEUP
+        "middle": (32, 64),  # \\ MOUSEEVENTF_MIDDLEDOWN \ MOUSEEVENTF_MIDDLEUP
     }
     VK_CODES = {
         "left": 0x01,    # \\ VK_LBUTTON
         "right": 0x02,   # \\ VK_RBUTTON
         "middle": 0x04,  # \\ VK_MBUTTON
     }
-    
+
     def __init__(self):
         self.user32 = ctypes.windll.user32
     
