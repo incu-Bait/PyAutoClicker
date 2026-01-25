@@ -1,5 +1,5 @@
 # =================================================================
-# QMW_EventHandler = (QMainWindow)
+#                       Event Handler 
 # Centralized event handler for all application events
 # and funnels to appropriate managers while handling UI coordination
 # ===================================================================
