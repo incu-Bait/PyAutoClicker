@@ -11,7 +11,7 @@ from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.custom_widgets.QGroupBox.PyGroupBox import PyGroupBox
 
 
-class QMW_EventHandler: 
+class EventHandler: 
     def __init__(self, main):
         self.main = main
     
@@ -60,27 +60,41 @@ class QMW_EventHandler:
                 error_message = f"Invalid hotkey format: {hotkey}"
                 self.main.statusBar().showMessage(error_message)
                 return
-            
             hotkey = hotkey.lower()
-            if hasattr(self.main, 'hotkey') and self.main.hotkey:
+            if hasattr(self.main, 'keyboard_listener') and self.main.keyboard_listener:
                 try:
-                    keyboard.remove_hotkey(self.main.hotkey)
-                except (KeyError, ValueError):
-                    pass
+                    self.main.keyboard_listener.stop()
+                    self.main.keyboard_listener = None
+                except Exception as e:
+                    print(f"Error stopping listener: {e}")
+            try:
+                keyboard.unhook_all()
+            except Exception as e:
+                print(f"Error unhooking all: {e}")
+            try:
+                if hasattr(self.main, 'hotkey_id'):
+                    try:
+                        keyboard.remove_hotkey(self.main.hotkey_id)
+                    except:
+                        pass
+                self.main.hotkey_id = keyboard.add_hotkey(hotkey, self.toggle_clicking)
+                self.main.hotkey = hotkey
 
-            keyboard.add_hotkey(hotkey, self.toggle_clicking)
-            self.main.hotkey = hotkey
-            
+            except Exception as e:
+                error_message = QMW_UIConfig.LOG_HOTKEY_FAILED_FORMAT.format(error=str(e))
+                self.main.statusBar().showMessage(error_message)
+                return
+
             if QMW_UIConfig.KEYBIND_TOGGLE_CLICKING in self.main.keybind_manager.keybinds:
                 self.main.keybind_manager.keybinds[QMW_UIConfig.KEYBIND_TOGGLE_CLICKING] = hotkey.upper()
                 self.main.keybind_manager.save_keybinds_to_file(self.main.keybind_manager.keybinds)
-
+            
             self.main.ui_manager.update_hotkey_ui(hotkey)
             self._update_toggle_button_text(hotkey)
             
             message = QMW_UIConfig.LOG_HOTKEY_CHANGED_FORMAT.format(hotkey=hotkey.upper())
             self.main.statusBar().showMessage(message)
-            
+
         except Exception as e:
             error_message = QMW_UIConfig.LOG_HOTKEY_FAILED_FORMAT.format(error=str(e))
             self.main.statusBar().showMessage(error_message)

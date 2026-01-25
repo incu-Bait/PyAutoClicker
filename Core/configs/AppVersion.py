@@ -1,6 +1,6 @@
 # ============================================
 # NOTE: 2026 - 01 - 23
-# Offically starting to tracking app version
+# Offically started to track app version
 # ============================================
 
 APP_NAME = "PyClicker"

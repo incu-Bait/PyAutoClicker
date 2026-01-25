@@ -5,7 +5,7 @@ from Core.managers.KeyBindManager import KeybindManager
 from Core.configs.Windows_Configs import QMW_UIConfig
 from Core.managers.Ui_Manager import UIManager
 from Core.managers.WindowManager import WindowManager
-from Core.Event_Handler import QMW_EventHandler
+from Core.Event_Handler import EventHandler
 from Core.managers.FileManager import FileManager
 from Core.script_engine.PyScriptEngine import PyScriptEngine
 
@@ -15,7 +15,7 @@ class PyClicker(QMainWindow):
         super().__init__()
         self.theme_manager = ThemeManager()
         self.keybind_manager = KeybindManager("KeyBinds/key_binds_data.json")
-        self.event_handler = QMW_EventHandler(self)
+        self.event_handler = EventHandler(self)
         self.window_manager = WindowManager(self)
         self.ui_manager = UIManager(self, self.theme_manager)
         self.file_manager = FileManager(self.keybind_manager, self.event_handler)
